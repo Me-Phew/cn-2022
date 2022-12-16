@@ -1,6 +1,7 @@
 import { Router } from '../types/Router';
 import SchoolRouter from './School';
 import CategoryRouter from './Category';
+import AuthorRouter from './Author';
 
 const routes = <Router[]>[
     {
@@ -10,6 +11,10 @@ const routes = <Router[]>[
     {
         path: '/category',
         router: CategoryRouter
+    },
+    {
+        path: '/author',
+        router: AuthorRouter
     }
 ];
 

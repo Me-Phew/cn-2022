@@ -1,3 +1,4 @@
+import { Length } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 import { Book } from './Book';
 
@@ -19,5 +20,6 @@ export class Category {
         type: 'varchar',
         length: 256
     })
+    @Length(5, 256)
     name: string;
 }

@@ -4,7 +4,7 @@ import { CategoryController } from '../controllers/category.controller';
 
 const CategoryRouter = Router();
 
-CategoryRouter.post('/', CategoryController.create);
-CategoryRouter.get('/', CategoryController.get);
+CategoryRouter.post('/', passport.authenticate('local'), CategoryController.create);
+CategoryRouter.get('/', passport.authenticate('local'), CategoryController.get);
 
 export default CategoryRouter;
