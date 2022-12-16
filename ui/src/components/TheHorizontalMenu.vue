@@ -31,6 +31,7 @@ const props = defineProps<{
         li {
             list-style: none;
             padding: 0 20px;
+            font-size: 20px;
         }
     }
 

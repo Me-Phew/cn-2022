@@ -35,7 +35,7 @@ const menuItems: Array<MenuItem> = [
 
 <template>
     <div class="school-dashboard-wrapper">
-        <TheNavbar />
+        <TheNavbar role="Administrator" name="Walenty" lastName="Szarek" />
         <TheHorizontalMenu :menuItems="menuItems" />
     </div>
 </template>

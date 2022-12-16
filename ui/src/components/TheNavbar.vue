@@ -2,6 +2,13 @@
 import { NAvatar } from 'naive-ui';
 import { Icon } from '@vicons/utils';
 import { School } from '@vicons/fa';
+
+const props = defineProps<{
+    role: string,
+    name: string,
+    secondName?: string | null,
+    lastName: string,
+}>()
 </script>
 
 <template>
@@ -14,8 +21,9 @@ import { School } from '@vicons/fa';
         </div>
         <div class="user-wrapper">
             <div class="user-info">
-                <h3>Patryk Gonet</h3>
-                <p>Administrator</p>
+                <h3>{{ props.name }} <span v-if="props.secondName">{{ props.secondName }}</span> {{ props.lastName
+                }}</h3>
+                <p>{{ props.role }}</p>
             </div>
             <div class="user-avatar">
                 <n-avatar round size="large" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
@@ -52,11 +60,13 @@ import { School } from '@vicons/fa';
         .user-info {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
+            justify-content: center;
 
             h3 {
                 color: var(--color-heading);
             }
+
         }
 
         .user-avatar {
