@@ -8,6 +8,7 @@ const props = defineProps<{
     name: string,
     secondName?: string | null,
     lastName: string,
+    src: string,
 }>()
 </script>
 
@@ -26,7 +27,7 @@ const props = defineProps<{
                 <p>{{ props.role }}</p>
             </div>
             <div class="user-avatar">
-                <n-avatar round size="large" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
+                <n-avatar round size="large" :src="props.src" />
             </div>
             <div class="user-settings">
                 <i class="ph-gear"></i>
