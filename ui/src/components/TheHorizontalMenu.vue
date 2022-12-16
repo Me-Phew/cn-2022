@@ -10,7 +10,7 @@ const props = defineProps<{
     <nav class="menu-wrapper">
         <ul>
             <li v-for="menuItem in props.menuItems" :key="menuItem.key">
-                <router-link :to="menuItem.pathName" class="menu-item">{{ menuItem.label }}</router-link>
+                <router-link :to="{ name: menuItem.pathName }" class="menu-item">{{ menuItem.label }}</router-link>
             </li>
         </ul>
     </nav>
