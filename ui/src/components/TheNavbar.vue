@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { NAvatar } from 'naive-ui';
+import { Icon } from '@vicons/utils';
+import { School } from '@vicons/fa';
 </script>
 
 <template>
     <div class="navbar-wrapper">
         <div class="school-name">
+            <Icon size="56" color="var(--color-accent)">
+                <component :is="School"></component>
+            </Icon>
             <h1>Biblioteka ZSEM</h1>
         </div>
         <div class="user-wrapper">
@@ -29,6 +34,17 @@ import { NAvatar } from 'naive-ui';
     display: flex;
     justify-content: space-between;
 
+    .school-name {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2em;
+
+        h1 {
+            color: var(--color-heading);
+        }
+    }
+
     .user-wrapper {
         display: flex;
         gap: 1.5rem;
@@ -37,6 +53,10 @@ import { NAvatar } from 'naive-ui';
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            h3 {
+                color: var(--color-heading);
+            }
         }
 
         .user-avatar {

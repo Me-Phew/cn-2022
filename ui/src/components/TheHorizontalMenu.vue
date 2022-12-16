@@ -35,7 +35,7 @@ const props = defineProps<{
     }
 
     a {
-        color: white;
+        color: var(--color-heading);
     }
 
     a.router-link-active {
