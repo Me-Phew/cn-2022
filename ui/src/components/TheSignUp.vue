@@ -10,7 +10,7 @@ import { SchoolFilled } from '@vicons/material';
   </SignUpItem>
   <div class="horizontal-divider"></div>
   <SignUpItem routeName="signUpUser" :icon="SchoolFilled" class="sign-up-user">
-    Utwórz konto ucznia / nauczyciela
+    Utwórz konto ucznia
   </SignUpItem>
 </template>
 

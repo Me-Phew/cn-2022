@@ -32,30 +32,8 @@ const router = createRouter({
               path: "",
               name: "signUpUser",
               components: {
-                SignUp: () => import("@/views/ChooseRoleView.vue"),
-                LogIn: () => import("@/views/LogInView.vue"),
-              },
-            },
-            {
-              path: "teacher",
-              name: "signUpTeacher",
-              components: {
                 SignUp: () => import("@/views/SignUpUserView.vue"),
                 LogIn: () => import("@/views/LogInView.vue"),
-              },
-              meta: {
-                accountType: "teacher",
-              },
-            },
-            {
-              path: "student",
-              name: "signUpStudent",
-              components: {
-                SignUp: () => import("@/views/SignUpUserView.vue"),
-                LogIn: () => import("@/views/LogInView.vue"),
-              },
-              meta: {
-                accountType: "student",
               },
             },
           ],
