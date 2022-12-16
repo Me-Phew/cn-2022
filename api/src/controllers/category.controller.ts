@@ -31,6 +31,23 @@ export class CategoryController {
         }
     }
 
+    static async get(req: Request, res: Response, next: NextFunction) {
+        try {
+            const categoryRepo = AppDataSource.getRepository(Category);
+            const categories = await categoryRepo.find({
+                ...(req.query.limit ? {
+                    take: +req.query.limit
+                } : {})
+            });
+
+            res.send({
+                categories: categories
+            });
+        } catch (err) {
+            return next(err);
+        }
+    }
+
     private static async categoryExists(name: string) {
         const repository = AppDataSource.getRepository(Category);
         const category = await repository.findOne({
