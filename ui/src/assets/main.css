@@ -1,0 +1,40 @@
+@import './base.css';
+
+#app {
+  font-weight: normal;
+}
+
+.n-config-provider {
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem 0;
+}
+
+a {
+  padding: .5rem;
+  border-radius: .375rem;
+}
+
+a,
+.text-accent {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: var(--transition-duration);
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: var(--color-accent-mute);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+}
+
+.step-description {
+  margin-bottom: 1rem;
+}
