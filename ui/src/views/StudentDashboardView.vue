@@ -25,7 +25,8 @@ const menuItems: Array<MenuItem> = [
 
 <template>
   <div class="student-dashboard-wrapper">
-    <TheNavbar role="Uczeń" name="Patryk" lastName="Gonet" />
+    <TheNavbar role="Uczeń" name="Patryk" lastName="Gonet"
+      src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
     <TheHorizontalMenu :menuItems="menuItems" />
   </div>
 </template>
@@ -34,6 +35,6 @@ const menuItems: Array<MenuItem> = [
 .student-dashboard-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 2rem;
 }
 </style>
