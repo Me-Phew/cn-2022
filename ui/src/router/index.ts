@@ -82,7 +82,9 @@ const router = createRouter({
         {
           path: "",
           name: "books",
-          components: {},
+          components: {
+            schoolDashboard: () => import('@/views/BooksView.vue'),
+          },
         },
         {
           path: "lendings",
