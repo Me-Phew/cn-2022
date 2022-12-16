@@ -7,7 +7,7 @@
 .n-config-provider {
   height: 100vh;
   width: 100vw;
-  padding: 2rem 0;
+  padding: 2rem 0 0 0;
 }
 
 .sign-up-item,
@@ -27,6 +27,7 @@
 }
 
 @media (hover: hover) {
+
   .sign-up-item:hover,
   .menu-item:hover,
   .return:hover {
