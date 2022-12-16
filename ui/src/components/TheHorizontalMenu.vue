@@ -10,7 +10,7 @@ const props = defineProps<{
     <nav class="menu-wrapper">
         <ul>
             <li v-for="menuItem in props.menuItems" :key="menuItem.key">
-                <router-link :to="menuItem.pathName">{{ menuItem.label }}</router-link>
+                <router-link :to="menuItem.pathName" class="menu-item">{{ menuItem.label }}</router-link>
             </li>
         </ul>
     </nav>
@@ -31,8 +31,6 @@ const props = defineProps<{
         li {
             list-style: none;
             padding: 0 20px;
-
-
         }
     }
 
@@ -41,7 +39,7 @@ const props = defineProps<{
     }
 
     a.router-link-active {
-        color: var(--color-accent) !important;
+        color: var(--color-accent);
     }
 }
 </style>
