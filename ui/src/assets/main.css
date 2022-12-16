@@ -10,12 +10,14 @@
   padding: 2rem 0;
 }
 
-a {
+.sign-up-item,
+.return {
   padding: .5rem;
   border-radius: .375rem;
 }
 
-a,
+.sign-up-item,
+.return,
 .text-accent {
   text-decoration: none;
   color: var(--color-accent);
@@ -23,7 +25,9 @@ a,
 }
 
 @media (hover: hover) {
-  a:hover {
+
+  .sign-up-item:hover,
+  .return:hover {
     background-color: var(--color-accent-mute);
   }
 }
