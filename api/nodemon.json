@@ -1,0 +1,9 @@
+{
+  "watch": [
+    "src",
+    "docs/swagger.json"
+  ],
+  "ext": ".ts",
+  "ignore": [],
+  "exec": "ts-node ./src/index.ts"
+}
