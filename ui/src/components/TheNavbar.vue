@@ -13,12 +13,12 @@ const props = defineProps<{
 
 <template>
     <div class="navbar-wrapper">
-        <div class="school-name">
+        <router-link :to="{ name: 'home' }" class="school-name">
             <Icon size="56" color="var(--color-accent)">
                 <component :is="School"></component>
             </Icon>
             <h1>Biblioteka ZSEM</h1>
-        </div>
+        </router-link>
         <div class="user-wrapper">
             <div class="user-info">
                 <h3>{{ props.name }} <span v-if="props.secondName">{{ props.secondName }}</span> {{ props.lastName
@@ -51,6 +51,14 @@ const props = defineProps<{
         h1 {
             color: var(--color-heading);
         }
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active,
+    a.router-link {
+        text-decoration: none;
     }
 
     .user-wrapper {

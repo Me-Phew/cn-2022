@@ -53,7 +53,7 @@ const router = createRouter({
       component: () => import("@/views/StudentDashboardView.vue"),
       children: [
         {
-          path: 'borrowed-books',
+          path: '',
           name: 'borrowedBooks',
           components: {},
         },
@@ -80,7 +80,7 @@ const router = createRouter({
       component: () => import("@/views/SchoolDashboardView.vue"),
       children: [
         {
-          path: "books",
+          path: "",
           name: 'books',
           components: {},
         },

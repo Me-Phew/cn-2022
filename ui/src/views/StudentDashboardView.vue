@@ -31,5 +31,9 @@ const menuItems: Array<MenuItem> = [
 </template>
 
 <style lang="scss" scoped>
-
+.student-dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
 </style>
