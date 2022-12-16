@@ -45,7 +45,11 @@ const logIn = () => {
         if (error instanceof AxiosError) {
           const response = handleRequestError(error);
           logInMessage.type = 'error';
-          logInMessage.content = `Nie udało się zalogować (status: ${response.status}, ${response.data?.message!})`;
+          if (response) {
+            logInMessage.content = `Nie udało się zalogować (status: ${response.status}, ${response.data?.message!})`;
+          } else {
+            logInMessage.content = 'Nie udało się zalogować (status: nieznany)';
+          }
         }
       }
       setTimeout(() => {

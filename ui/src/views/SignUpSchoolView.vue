@@ -53,7 +53,11 @@ const handleSubmit = async () => {
     if (error instanceof AxiosError) {
       const response = handleRequestError(error);
       schoolCreationMessage.type = 'error';
-      schoolCreationMessage.content = `Nie udało się utworzyć szkoły (status: ${response.status}, ${response.data?.message!})`;
+      if (response) {
+        schoolCreationMessage.content = `Nie udało się utworzyć szkoły (status: ${response.status}, ${response.data?.message!})`;
+      } else {
+        schoolCreationMessage.content = 'Nie udało się utworzyć szkoły (status: nieznany)';
+      }
     }
   }
   setTimeout(() => {
