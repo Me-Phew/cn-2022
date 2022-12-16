@@ -12,12 +12,15 @@ AppDataSource.initialize().then(async () => {
     const { PORT } = process.env;
     const app = express();
 
-    app.use(cors());
+    app.use(cors({
+        origin: 'http://localhost:5173',
+        credentials: true
+    }));
     app.use(json());
     app.use(session({
         secret: 'test',
         saveUninitialized: false,
-        resave: false,
+        resave: false
     }));
     app.use(passport.authenticate('session'));
     swaggerDocs(app, PORT as unknown as number);
