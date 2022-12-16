@@ -38,9 +38,5 @@ defineProps<{
     border-radius: .375rem;
     color: var(--color-accent);
   }
-
-  @media (min-width: 1024px) {
-    width: 50%;
-  }
 }
 </style>
