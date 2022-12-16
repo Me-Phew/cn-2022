@@ -53,18 +53,18 @@ const router = createRouter({
       component: () => import("@/views/StudentDashboardView.vue"),
       children: [
         {
-          path: '',
-          name: 'borrowedBooks',
+          path: "",
+          name: "borrowedBooks",
           components: {},
         },
         {
-          path: 'booked-books',
-          name: 'bookedBooks',
+          path: "booked-books",
+          name: "bookedBooks",
           components: {},
         },
         {
-          path: 'search-in-books',
-          name: 'searchInBooks',
+          path: "search-in-books",
+          name: "searchInBooks",
           components: {},
         },
       ],
@@ -81,24 +81,24 @@ const router = createRouter({
       children: [
         {
           path: "",
-          name: 'books',
+          name: "books",
           components: {},
         },
         {
-          path: 'lendings',
-          name: 'lendings',
+          path: "lendings",
+          name: "lendings",
           components: {},
         },
         {
           path: "bookings",
-          name: 'bookings',
+          name: "bookings",
           components: {},
         },
         {
           path: "users",
           name: "users",
           components: {},
-        }
+        },
       ],
       meta: {
         requiresAuth: false,
