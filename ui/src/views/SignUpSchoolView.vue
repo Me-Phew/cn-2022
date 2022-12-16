@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import axios from 'axios';
+import { useRouter } from 'vue-router';
+import axios, { AxiosError } from 'axios';
 import {
   NSteps,
   NStep,
   NCollapseTransition,
   NButton,
+  useMessage,
 } from "naive-ui";
 import TheSchoolSignUp from "@/components/TheSchoolSignUp.vue";
 import TheEnsureSchoolDataCorrect from "@/components/TheEnsureSchoolDataCorrect.vue";
+import { handleRequestError } from '@/helpers';
 import type { SchoolSignUp } from "@/components/TheSchoolSignUp.vue";
+
+const router = useRouter();
+const message = useMessage();
 
 const schoolData = ref<SchoolSignUp | null>(null);
 
@@ -29,7 +35,22 @@ const completeRegistration = (data: SchoolSignUp) => {
 }
 
 const handleSubmit = async () => {
-  // 
+  try {
+    const response = await axios.post('school', {
+      ...schoolData.value,
+      'passwordConfirm': schoolData.value?.reenteredPassword
+    });
+    if (response.status === 200) {
+      message.success('Szkoła została utworzona');
+      router.push({ name: 'home' });
+    }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const response = handleRequestError(error);
+
+      message.error(`Nie udało się utworzyć szkoły (status: ${response.status}, ${response.data?.message!})`);
+    }
+  }
 }
 </script>
 

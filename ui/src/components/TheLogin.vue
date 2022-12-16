@@ -8,11 +8,9 @@ import type {
   FormRules,
 } from "naive-ui";
 import { useMessage, NFormItem, NForm, NInput, NButton } from "naive-ui";
-import { useLoadingBar } from "naive-ui";
 import { validateEmail } from "@/helpers";
 
 const router = useRouter();
-const loadingBar = useLoadingBar();
 
 const formRef = ref<FormInst | null>(null);
 
@@ -35,11 +33,9 @@ const logIn = () => {
         type: "loading",
         duration: 0,
       });
-      loadingBar.start();
       // todo: login
       setTimeout(() => {
         router.push({ name: "dashboardStudent" });
-        loadingBar.finish();
         loadingMessage.destroy();
       }, 1500);
     } else {
@@ -91,26 +87,16 @@ const rules: FormRules = {
 <template>
   <n-form ref="formRef" :model="model" :rules="rules">
     <n-form-item path="email" label="E-mail">
-      <n-input
-        v-model:value="model.email"
-        type="text"
-        placeholder="user@example.com"
-        @keydown.enter.prevent="logIn"
-        :input-props="{
+      <n-input v-model:value="model.email" type="text" placeholder="user@example.com"
+        @keydown.enter.prevent="logIn" :input-props="{
           autocomplete: 'email',
-        }"
-      />
+        }" />
     </n-form-item>
     <n-form-item path="password" label="Hasło">
-      <n-input
-        v-model:value="model.password"
-        type="password"
-        placeholder="••••••••"
-        @keydown.enter.prevent="logIn"
-        :input-props="{
+      <n-input v-model:value="model.password" type="password" placeholder="••••••••"
+        @keydown.enter.prevent="logIn" :input-props="{
           autocomplete: 'password',
-        }"
-      />
+        }" />
     </n-form-item>
     <div class="button-wrapper">
       <n-button round type="primary" @click.prevent="logIn">
@@ -120,4 +106,6 @@ const rules: FormRules = {
   </n-form>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>
