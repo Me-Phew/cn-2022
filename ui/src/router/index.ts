@@ -56,6 +56,16 @@ const router = createRouter({
       },
     },
     {
+      path: "/dashboard-school",
+      name: "dashboardSchool",
+      component: () => import("@/views/SchoolDashboardView.vue"),
+      meta: {
+        requiresAuth: false,
+        requiredPermissionLevel: "school",
+        transition: "curtains-transition",
+      },
+    },
+    {
       path: "/:catchAll(.*)",
       name: "notFound",
       component: () => import("@/views/PageNotFoundView.vue"),
