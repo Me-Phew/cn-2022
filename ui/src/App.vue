@@ -7,6 +7,8 @@ import {
   NConfigProvider,
   NMessageProvider,
   NLoadingBarProvider,
+  NDialogProvider,
+  NNotificationProvider,
 } from "naive-ui";
 import { usePreferredColorScheme } from "@vueuse/core";
 import type { MessageProviderProps } from "naive-ui";
@@ -16,16 +18,18 @@ const messagePlacement = ref<MessageProviderProps["placement"]>("bottom");
 </script>
 
 <template>
-  <n-config-provider
-    :theme="preferredColorScheme === 'dark' ? darkTheme : lightTheme"
-  >
+  <n-config-provider :theme="preferredColorScheme === 'dark' ? darkTheme : lightTheme">
     <n-loading-bar-provider>
       <n-message-provider :placement="messagePlacement">
-        <RouterView v-slot="{ Component, route }">
-          <transition :name="route.meta?.transition" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </RouterView>
+        <n-dialog-provider>
+          <n-notification-provider>
+            <RouterView v-slot="{ Component, route }">
+              <transition :name="route.meta?.transition" mode="out-in">
+                <component :is="Component" />
+              </transition>
+            </RouterView>
+          </n-notification-provider>
+        </n-dialog-provider>
       </n-message-provider>
     </n-loading-bar-provider>
   </n-config-provider>
