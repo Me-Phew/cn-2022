@@ -16,10 +16,10 @@ const handleRequestError = (error: AxiosError) => {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
-    throw error;
+    return null;
   }
   // Something happened in setting up the request that triggered an Error
-  throw error;
+  return null;
 };
 
 const validateEmail = (email: string): Boolean => {

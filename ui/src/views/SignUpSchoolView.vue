@@ -35,22 +35,34 @@ const completeRegistration = (data: SchoolSignUp) => {
 }
 
 const handleSubmit = async () => {
+  const schoolCreationMessage = message.create("Tworzenie szkoły", {
+    type: "loading",
+    duration: 0,
+  });
   try {
     const response = await axios.post('school', {
       ...schoolData.value,
       'passwordConfirm': schoolData.value?.reenteredPassword
     });
     if (response.status === 200) {
-      message.success('Szkoła została utworzona');
+      schoolCreationMessage.type = 'success';
+      schoolCreationMessage.content = 'Szkoła została utworzona';
       router.push({ name: 'home' });
     }
   } catch (error) {
     if (error instanceof AxiosError) {
       const response = handleRequestError(error);
-
-      message.error(`Nie udało się utworzyć szkoły (status: ${response.status}, ${response.data?.message!})`);
+      schoolCreationMessage.type = 'error';
+      if (response) {
+        schoolCreationMessage.content = `Nie udało się utworzyć szkoły (status: ${response.status}, ${response.data?.message!})`;
+      } else {
+        schoolCreationMessage.content = 'Nie udało się utworzyć szkoły (status: nieznany)';
+      }
     }
   }
+  setTimeout(() => {
+    schoolCreationMessage.destroy();
+  }, 2000);
 }
 </script>
 

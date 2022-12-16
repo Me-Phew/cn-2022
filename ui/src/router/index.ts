@@ -51,6 +51,23 @@ const router = createRouter({
       path: "/dashboard-student",
       name: "dashboardStudent",
       component: () => import("@/views/StudentDashboardView.vue"),
+      children: [
+        {
+          path: "",
+          name: "borrowedBooks",
+          components: {},
+        },
+        {
+          path: "booked-books",
+          name: "bookedBooks",
+          components: {},
+        },
+        {
+          path: "search-in-books",
+          name: "searchInBooks",
+          components: {},
+        },
+      ],
       meta: {
         requiresAuth: false,
         requiredPermissionLevel: "student",
@@ -63,25 +80,25 @@ const router = createRouter({
       component: () => import("@/views/SchoolDashboardView.vue"),
       children: [
         {
-          path: "books",
-          name: 'books',
+          path: "",
+          name: "books",
           components: {},
         },
         {
-          path: 'lendings',
-          name: 'lendings',
+          path: "lendings",
+          name: "lendings",
           components: {},
         },
         {
           path: "bookings",
-          name: 'bookings',
+          name: "bookings",
           components: {},
         },
         {
           path: "users",
           name: "users",
           components: {},
-        }
+        },
       ],
       meta: {
         requiresAuth: false,

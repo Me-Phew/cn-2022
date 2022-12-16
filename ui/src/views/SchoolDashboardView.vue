@@ -35,11 +35,16 @@ const menuItems: Array<MenuItem> = [
 
 <template>
     <div class="school-dashboard-wrapper">
-        <TheNavbar />
+        <TheNavbar role="Administrator" name="Walenty" lastName="Szarek"
+            src="https://previews.123rf.com/images/findriyani/findriyani1807/findriyani180700241/105630149-education-people-school-logo-design-template.jpg" />
         <TheHorizontalMenu :menuItems="menuItems" />
     </div>
 </template>
 
 <style lang="scss" scoped>
-
+.school-dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
 </style>

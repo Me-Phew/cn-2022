@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import axios, { AxiosError } from 'axios';
 import type {
   FormInst,
   FormItemRule,
@@ -8,7 +9,7 @@ import type {
   FormRules,
 } from "naive-ui";
 import { useMessage, NFormItem, NForm, NInput, NButton } from "naive-ui";
-import { validateEmail } from "@/helpers";
+import { validateEmail, handleRequestError } from "@/helpers";
 
 const router = useRouter();
 
@@ -19,25 +20,41 @@ interface ModelType {
   password: string | null;
 }
 
-const model = ref<ModelType>({
-  email: null,
-  password: null,
+const logInData = ref<ModelType>({
+  email: 'company@example.com',
+  password: 'Kwakwa5!',
 });
 
 const message = useMessage();
 
 const logIn = () => {
-  formRef.value?.validate((errors: Array<FormValidationError> | undefined) => {
+  formRef.value?.validate(async (errors: Array<FormValidationError> | undefined) => {
     if (!errors) {
-      const loadingMessage = message.create("Logowanie", {
+      const logInMessage = message.create("Logowanie", {
         type: "loading",
         duration: 0,
       });
-      // todo: login
+      try {
+        const response = await axios.post('school/login', logInData.value);
+        if (response.status === 200) {
+          logInMessage.type = 'success';
+          logInMessage.content = 'Pomyślnie zalogowano';
+          router.push('/dashboard-student');
+        }
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          const response = handleRequestError(error);
+          logInMessage.type = 'error';
+          if (response) {
+            logInMessage.content = `Nie udało się zalogować (status: ${response.status}, ${response.data?.message!})`;
+          } else {
+            logInMessage.content = 'Nie udało się zalogować (status: nieznany)';
+          }
+        }
+      }
       setTimeout(() => {
-        router.push({ name: "dashboardStudent" });
-        loadingMessage.destroy();
-      }, 1500);
+        logInMessage.destroy();
+      }, 2000);
     } else {
       message.error("Najpierw należy poprawnie uzupełnić formularz");
     }
@@ -85,15 +102,15 @@ const rules: FormRules = {
 </script>
 
 <template>
-  <n-form ref="formRef" :model="model" :rules="rules">
+  <n-form ref="formRef" :model="logInData" :rules="rules">
     <n-form-item path="email" label="E-mail">
-      <n-input v-model:value="model.email" type="text" placeholder="user@example.com"
+      <n-input v-model:value="logInData.email" type="text" placeholder="user@example.com"
         @keydown.enter.prevent="logIn" :input-props="{
           autocomplete: 'email',
         }" />
     </n-form-item>
     <n-form-item path="password" label="Hasło">
-      <n-input v-model:value="model.password" type="password" placeholder="••••••••"
+      <n-input v-model:value="logInData.password" type="password" placeholder="••••••••"
         @keydown.enter.prevent="logIn" :input-props="{
           autocomplete: 'password',
         }" />

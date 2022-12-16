@@ -36,7 +36,7 @@ const emit = defineEmits(["completed"]);
 const formRef = ref<FormInst | null>(null);
 const rPasswordFormItemRef = ref<FormItemInst | null>(null);
 
-const schoolSignUpModel = ref<SchoolSignUp>({ // todo: remove placeholders
+const schoolSignUpModel = ref<SchoolSignUp>({
   name: "Akademia Pana Kleksa",
   email: "company@example.com",
   regon: "000000000",
