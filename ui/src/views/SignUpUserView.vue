@@ -19,13 +19,7 @@ const next = () => {
 <template>
   <div class="student-sign-up sign-up">
     <h1 class="text-accent">
-      Utwórz swoje konto
-      <template v-if="$route.meta?.accountType === 'teacher'">
-        nauczyciela
-      </template>
-      <template v-else-if="$route.meta?.accountType === 'student'">
-        ucznia
-      </template>
+      Utwórz swoje konto ucznia
     </h1>
     <n-steps vertical :current="current" status="process">
       <n-step title="Weryfikacja dostępu">
@@ -34,10 +28,7 @@ const next = () => {
             <p>
               Potwierdź swój dostęp, podając kod dostarczony przez twoją szkołę
             </p>
-            <ProvideVerificationCodeItem
-              requiredCodeType="school"
-              @completed="next"
-            />
+            <ProvideVerificationCodeItem requiredCodeType="school" @completed="next" />
           </div>
         </n-collapse-transition>
       </n-step>
@@ -63,15 +54,16 @@ const next = () => {
             <p>
               Zweryfikuj poprawność danych i prześlij wniosek o aktywację konta
             </p>
-            <TheSchoolSignUp />
           </div>
         </n-collapse-transition>
       </n-step>
     </n-steps>
-    <router-link class="return" :to="{ name: 'signUpUser' }">
+    <router-link class="return" :to="{ name: 'home' }">
       Powrót
     </router-link>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

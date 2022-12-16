@@ -56,7 +56,6 @@ const handleSubmit = (e: MouseEvent) => {
     if (!errors) {
       emit('completed', schoolSignUpModel.value);
     } else {
-      console.log(errors);
       message.error("Najpierw należy poprawnie uzupełnić formularz");
     }
   });

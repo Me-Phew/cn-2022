@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useUtilsStore } from "@/stores/utils";
 import HomeView from "@/views/HomeView.vue";
+import { NavigationStatus } from "@/stores/utils";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,30 +34,8 @@ const router = createRouter({
               path: "",
               name: "signUpUser",
               components: {
-                SignUp: () => import("@/views/ChooseRoleView.vue"),
-                LogIn: () => import("@/views/LogInView.vue"),
-              },
-            },
-            {
-              path: "teacher",
-              name: "signUpTeacher",
-              components: {
                 SignUp: () => import("@/views/SignUpUserView.vue"),
                 LogIn: () => import("@/views/LogInView.vue"),
-              },
-              meta: {
-                accountType: "teacher",
-              },
-            },
-            {
-              path: "student",
-              name: "signUpStudent",
-              components: {
-                SignUp: () => import("@/views/SignUpUserView.vue"),
-                LogIn: () => import("@/views/LogInView.vue"),
-              },
-              meta: {
-                accountType: "student",
               },
             },
           ],
@@ -78,6 +58,38 @@ const router = createRouter({
       },
     },
     {
+      path: "/dashboard-school",
+      name: "dashboardSchool",
+      component: () => import("@/views/SchoolDashboardView.vue"),
+      children: [
+        {
+          path: "books",
+          name: 'books',
+          components: {},
+        },
+        {
+          path: 'lendings',
+          name: 'lendings',
+          components: {},
+        },
+        {
+          path: "bookings",
+          name: 'bookings',
+          components: {},
+        },
+        {
+          path: "users",
+          name: "users",
+          components: {},
+        }
+      ],
+      meta: {
+        requiresAuth: false,
+        requiredPermissionLevel: "school",
+        transition: "curtains-transition",
+      },
+    },
+    {
       path: "/:catchAll(.*)",
       name: "notFound",
       component: () => import("@/views/PageNotFoundView.vue"),
@@ -85,40 +97,58 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach(async (to) => {
-//   const authStore = useAuthStore();
-//   await authStore.dispatch("loadAuthData");
-//   if (authStore.getters.isLoggedIn) {
-//     if (to.name === "login" || to.name === "sign-up") return "/";
-//   }
-//   if (to.meta.requiresAuth) {
-//     if (!store.getters.isLoggedIn) {
-//       return { name: "login" };
-//     }
-//     switch (to.meta.requiredPermissionLevel) {
-//       case "admin": {
-//         if (!store.getters.isAdmin) {
-//           return {
-//             name: "insufficientPermissions",
-//           };
-//         }
-//         break;
-//       }
-//       case "owner": {
-//         if (!store.getters.isOwner) {
-//           return {
-//             name: "insufficientPermissions",
-//           };
-//         }
-//         break;
-//       }
-//       default: {
-//         break;
-//       }
-//     }
-//   }
+router.beforeEach(async (to) => {
+  const utilsStore = useUtilsStore();
+  utilsStore.$patch({
+    navigationStatus: NavigationStatus.inProgress,
+  });
+  //   const authStore = useAuthStore();
+  //   await authStore.dispatch("loadAuthData");
+  //   if (authStore.getters.isLoggedIn) {
+  //     if (to.name === "login" || to.name === "sign-up") return "/";
+  //   }
+  //   if (to.meta.requiresAuth) {
+  //     if (!store.getters.isLoggedIn) {
+  //       return { name: "login" };
+  //     }
+  //     switch (to.meta.requiredPermissionLevel) {
+  //       case "admin": {
+  //         if (!store.getters.isAdmin) {
+  //           return {
+  //             name: "insufficientPermissions",
+  //           };
+  //         }
+  //         break;
+  //       }
+  //       case "owner": {
+  //         if (!store.getters.isOwner) {
+  //           return {
+  //             name: "insufficientPermissions",
+  //           };
+  //         }
+  //         break;
+  //       }
+  //       default: {
+  //         break;
+  //       }
+  //     }
+  //   }
 
-//   return true;
-// });
+  //   return true;
+});
+
+router.afterEach((_to, _from, failure) => {
+  const utilsStore = useUtilsStore();
+
+  if (failure) {
+    utilsStore.$patch({
+      navigationStatus: NavigationStatus.failed,
+    });
+  } else {
+    utilsStore.$patch({
+      navigationStatus: NavigationStatus.success,
+    });
+  }
+});
 
 export default router;
