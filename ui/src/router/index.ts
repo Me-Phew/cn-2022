@@ -61,6 +61,28 @@ const router = createRouter({
       path: "/dashboard-school",
       name: "dashboardSchool",
       component: () => import("@/views/SchoolDashboardView.vue"),
+      children: [
+        {
+          path: "books",
+          name: 'books',
+          components: {},
+        },
+        {
+          path: 'lendings',
+          name: 'lendings',
+          components: {},
+        },
+        {
+          path: "bookings",
+          name: 'bookings',
+          components: {},
+        },
+        {
+          path: "users",
+          name: "users",
+          components: {},
+        }
+      ],
       meta: {
         requiresAuth: false,
         requiredPermissionLevel: "school",

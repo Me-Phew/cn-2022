@@ -1,4 +1,4 @@
-@import './base.css';
+@import "./base.css";
 
 #app {
   font-weight: normal;
@@ -11,12 +11,14 @@
 }
 
 .sign-up-item,
+.menu-item,
 .return {
-  padding: .5rem;
-  border-radius: .375rem;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
 }
 
 .sign-up-item,
+.menu-item,
 .return,
 .text-accent {
   text-decoration: none;
@@ -25,8 +27,8 @@
 }
 
 @media (hover: hover) {
-
   .sign-up-item:hover,
+  .menu-item:hover,
   .return:hover {
     background-color: var(--color-accent-mute);
   }
