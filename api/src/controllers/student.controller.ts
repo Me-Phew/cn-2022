@@ -35,6 +35,7 @@ export class StudentController {
             if (code) {
                 code.wasUsed = true;
                 await codesRepo.save(code);
+                student.school = code.school;
             }
 
             await passwordRepo.save(password);
