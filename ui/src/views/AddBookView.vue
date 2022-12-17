@@ -13,7 +13,7 @@ import {
   NInputNumber,
   NDatePicker,
   NUpload,
-  UploadFileInfo,
+  type UploadFileInfo,
   type SelectOption,
   type FormItemRule,
   type UploadInst,
@@ -62,13 +62,13 @@ export interface AuthorData {
 }
 
 const authorData = ref<AuthorData>({
-  firstName: 'Krzysztof',
+  firstName: 'Carl_',
   secondName: null,
-  lastName: 'Janusz',
+  lastName: 'Sagan',
 });
 
 const categoryData = ref<CategoryData>({
-  name: null,
+  name: 'Popularnonaukowe',
 });
 
 const message = useMessage();
@@ -102,13 +102,13 @@ watch(categoriesData, (newValue) => {
 })
 
 const bookData = ref<BookData>({
-  title: 'Opowieści dziwnej treści',
+  title: 'Pale Blue Dot',
   author: 1,
   category: 1,
-  amount: 14,
-  quantity: 14,
-  price: 14,
-  publishYear: 1514761200000,
+  amount: 40,
+  quantity: 40,
+  price: 18,
+  publishYear: 757378800000,
 });
 
 const authorsLoading = ref(true);
@@ -333,6 +333,12 @@ const createCategory = () => {
 const bookForm = ref<FormInst | null>(null);
 const uploadPhoto = ref<UploadInst | null>(null);
 
+const files: Array<UploadFileInfo> = [];
+
+const handleUpdateFileList = (fileList: UploadFileInfo[]) => {
+  console.log(fileList);
+}
+
 const creatingBookInProgress = ref(false);
 const createBook = () => {
   if (!creatingBookInProgress.value) {
@@ -351,7 +357,8 @@ const createBook = () => {
             amount: bookData.value.amount?.toString(),
             quantity: bookData.value.amount?.toString(),
             price: bookData.value.price?.toString(),
-            publishYear: new Date(bookData.value.publishYear).getFullYear().toString(),
+            publishYear: new Date(bookData.value).getFullYear().toString(),
+            category: bookData.value.category?.toString(),
           });
           if (response.status === 200) {
             createBookMessage.type = 'success';
@@ -502,7 +509,7 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
 
       <n-form-item path="image" label="Zdjęcie okładki">
         <n-upload :default-upload="false" ref="uploadPhoto" list-type="image-card" :max="1"
-          @preview="handleThumbnailPreview">
+          @preview="handleThumbnailPreview" @update-file-list="handleUpdateFileList">
           Załącz zdjęcie
         </n-upload>
         <n-modal v-model:show="showThumbnailPreviewModal" preset="card" style="width: 600px"
@@ -533,6 +540,12 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
   flex-direction: column;
   gap: 1rem;
   width: 400px;
+
+  .n-form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
   .n-input-wrapper {
     width: 400px;
