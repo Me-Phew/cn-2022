@@ -10,6 +10,10 @@ export class BookController {
             const bookRepository = AppDataSource.getRepository(Book);
             const book = new Book();
 
+            if (req.file) {
+                book.thumbnail = req.file.path;
+            }
+
             for (const [key, value] of Object.entries(req.body)) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore

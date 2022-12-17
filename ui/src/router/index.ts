@@ -106,7 +106,9 @@ const router = createRouter({
         {
           path: "users",
           name: "users",
-          components: {},
+          components: {
+            schoolDashboard: () => import('@/views/SchoolUsersView.vue'),
+          },
         },
       ],
       meta: {

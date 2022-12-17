@@ -30,6 +30,7 @@ AppDataSource.initialize()
                 },
             })
         );
+        app.use('/public/img', express.static('uploads'));
         app.use(passport.authenticate('session'));
         swaggerDocs(app, PORT as unknown as number);
         registerRoutes(app, routes);

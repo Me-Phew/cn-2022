@@ -1,5 +1,5 @@
-import { IsAlphanumeric, IsDecimal, IsNumber, IsOptional, IsString } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany, ManyToOne } from 'typeorm';
+import { IsDecimal, IsNumberString, IsOptional, IsString } from 'class-validator';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 import { Author } from './Author';
 import { Category } from './Category';
 import { School } from './School';
@@ -34,13 +34,13 @@ export class Book {
     @Column({
         type: 'int'
     })
-    @IsNumber()
+    @IsNumberString()
     amount: number;
 
     @Column({
         type: 'int'
     })
-    @IsNumber()
+    @IsNumberString()
     quantity: number;
 
     @Column({
@@ -52,7 +52,7 @@ export class Book {
     @Column({
         type: 'int'
     })
-    @IsNumber()
+    @IsNumberString()
     publishYear: number;
 
     @Column({
@@ -61,4 +61,12 @@ export class Book {
     })
     @IsOptional()
     description: string;
+
+    @Column({
+        type: 'varchar',
+        nullable: true,
+        length: 256
+    })
+    @IsOptional()
+    thumbnail: string;
 }
