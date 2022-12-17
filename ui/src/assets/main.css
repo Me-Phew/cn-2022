@@ -32,7 +32,6 @@
 }
 
 @media (hover: hover) {
-
   .sign-up-item:hover,
   .menu-item:hover,
   .return:hover {
@@ -51,6 +50,14 @@
   margin-bottom: 1rem;
 }
 
+.vertical-divider {
+  position: absolute;
+  left: 0;
+  height: 90%;
+  width: 2px;
+  background-color: var(--color-background-mute);
+  border-radius: 0.345rem;
+}
 .dashboard-page {
   padding: 2rem;
 }
@@ -58,7 +65,7 @@
 .heading {
   font-size: 1.2rem;
   font-weight: bolder;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .n-input {
