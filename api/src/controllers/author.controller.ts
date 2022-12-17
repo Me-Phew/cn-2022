@@ -21,7 +21,7 @@ export class AuthorController {
                 throw new ValidationError(errors);
             }
 
-            if (await AuthorController.authorExists(req.body.first_name, req.body.last_name, req.body.second_name)) {
+            if (await AuthorController.authorExists(req.body.firstName, req.body.lastName, req.body.secondName)) {
                 throw new ValidationError([], 'Such author already exists.', 409);
             }
 
@@ -54,9 +54,9 @@ export class AuthorController {
     private static async authorExists(firstName: string, lastName: string, secondName: string) {
         const repository = AppDataSource.getRepository(Author);
         const author = await repository.findOneBy({
-            first_name: firstName,
-            last_name: lastName,
-            ...(secondName ? { second_name: secondName } : {})
+            firstName,
+            lastName,
+            ...(secondName ? { secondName } : {})
         });
 
         return !!author;

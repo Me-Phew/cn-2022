@@ -21,7 +21,7 @@ export class Author {
         length: 256
     })
     @Length(5, 256)
-    first_name: string;
+    firstName: string;
 
     @Column({
         type: 'varchar',
@@ -30,12 +30,12 @@ export class Author {
     })
     @IsOptional()
     @Length(5, 256)
-    second_name: string;
+    secondName: string;
 
     @Column({
         type: 'varchar',
         length: 256
     })
     @Length(5, 256)
-    last_name: string;
+    lastName: string;
 }
