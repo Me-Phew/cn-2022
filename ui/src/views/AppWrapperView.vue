@@ -105,11 +105,6 @@ main.form-view {
   place-items: center;
   place-content: center;
   position: relative;
-
-  .button-wrapper {
-    display: flex;
-    justify-content: center;
-  }
 }
 
 .sign-up-wrapper {

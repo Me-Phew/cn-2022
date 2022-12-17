@@ -26,6 +26,11 @@
   transition: var(--transition-duration);
 }
 
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 @media (hover: hover) {
 
   .sign-up-item:hover,
@@ -44,4 +49,14 @@
 
 .step-description {
   margin-bottom: 1rem;
+}
+
+.dashboard-page {
+  padding: 2rem;
+}
+
+.heading {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  margin-bottom: .5rem;
 }
