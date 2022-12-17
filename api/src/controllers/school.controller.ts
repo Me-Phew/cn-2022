@@ -74,6 +74,35 @@ export class SchoolController {
         }
     }
 
+    static async getCodes(req: Request, res: Response, next: NextFunction) {
+        try {
+            const schoolId = +(req.user as School).id;
+            const schoolRepo = AppDataSource.getRepository(School);
+            const school = await schoolRepo.findOneBy({
+                id: schoolId
+            });
+
+            if (!school) {
+                return next(new AuthenticationError());
+            }
+
+            const codesRepo = AppDataSource.getRepository(RegistrationCode);
+            const codes = await codesRepo.find({
+                where: {
+                    school: {
+                        id: schoolId
+                    }
+                }
+            });
+
+            res.send({
+                codes: codes
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     private static async schoolExistst(email: string, nip: string, regon:  string, rspo: string) {
         const repository = AppDataSource.getRepository(School);
         const school = await repository.findOne({
