@@ -63,7 +63,10 @@ export class BookController {
             const { limit } = req.query;
             const bookRepo = AppDataSource.getRepository(Book);
             const books = await bookRepo.find({
-                ...(limit ? { take: +limit } : {})
+                ...(limit ? { take: +limit } : {}), relations: {
+                    author: true,
+                    category: true
+                }
             });
             
             res.send({
