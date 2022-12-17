@@ -4,7 +4,11 @@ import { NButton } from 'naive-ui';
 
 <template>
     <div class="books-wrapper">
-        <n-button type="primary" size="large">Dodaj książkę</n-button>
+        <router-link :to="{ name: 'addBook' }">
+            <n-button type="primary" size="large">
+                Dodaj książkę
+            </n-button>
+        </router-link>
     </div>
 </template>
 
