@@ -202,14 +202,12 @@ const cardsDataComputed = computed(() => {
                 <n-card :title="card.title" class="n-card">
                     <template #cover>
                         <img :src="card.imgSrc">
-                    </template>
-                    <div class="tags">
                         <n-tag type="info" size="small">
                             <h3>{{ card.category }}</h3>
                         </n-tag>
-                        <n-tag>
-                            <h3>Autor: {{ card.author }}</h3>
-                        </n-tag>
+                    </template>
+                    <div class="tags">
+                        <h3>Autor: {{ card.author }}</h3>
                         <n-tag :bordered="false">
                             <p>
                                 Dostępne:
