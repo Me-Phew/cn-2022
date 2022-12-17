@@ -63,7 +63,7 @@ const handleSubmit = async () => {
         try {
           const response = await axios.get(`school/validate-code/${model.value.verificationCode}`);
           console.log(response);
-          if (!response.data) {
+          if (response.status === 200) {
             loadingMessage.destroy();
             loading.value = false;
             emit("completed");
