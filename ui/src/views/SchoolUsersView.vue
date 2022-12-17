@@ -6,7 +6,14 @@ const openCodeGeneratorModal = ref(false);
 const codesCount = ref(0);
 
 const generateCodes = () => {
-    console.log(codesCount.value);
+    if (!(codesCount.value === 0)) {
+        console.log(codesCount.value);
+        openCodeGeneratorModal.value = false;
+    }
+};
+
+const cancelGeneratingCodes = () => {
+    codesCount.value = 0;
     openCodeGeneratorModal.value = false;
 };
 </script>
@@ -25,7 +32,7 @@ const generateCodes = () => {
                     <n-button type="success" size="large" @click="generateCodes">
                         Generuj
                     </n-button>
-                    <n-button type="error" size="large" @click="openCodeGeneratorModal = false">
+                    <n-button type="error" size="large" @click="cancelGeneratingCodes">
                         Anuluj
                     </n-button>
                 </div>
