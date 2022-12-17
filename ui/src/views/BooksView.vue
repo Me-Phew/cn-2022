@@ -6,6 +6,7 @@ export interface CardInterface extends Object {
     title: string,
     imgSrc: string,
     author: string,
+    category: string,
     quantity: number,
     available: number,
 }
@@ -19,6 +20,7 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
         quantity: 20,
         available: 4,
     },
@@ -26,6 +28,7 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
         quantity: 20,
         available: 4,
     },
@@ -33,6 +36,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 0,
     },
@@ -40,6 +45,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 18,
     },
@@ -47,6 +54,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -54,6 +63,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -61,6 +72,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -68,6 +81,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -75,6 +90,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -82,6 +99,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -89,6 +108,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -96,6 +117,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -103,6 +126,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -110,6 +135,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -117,6 +144,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -124,6 +153,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -131,6 +162,8 @@ const cardsData = ref<Array<CardInterface>>([
         title: 'W pustyni i w puszczy',
         imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
         author: 'Henryk Sienkiewicz',
+        category: 'Pierdolony MeloDramat',
+
         quantity: 20,
         available: 4,
     },
@@ -161,6 +194,7 @@ const cardsDataComputed = computed(() => {
                         <img :src="card.imgSrc">
                     </template>
                     <h3><strong>Autor: </strong>{{ card.author }}</h3>
+                    <h3><strong>Kategoria: </strong>{{ card.category }}</h3>
                     <p>
                         <strong>Dostępne: </strong><span :class="card.availability">{{ card.available }}/{{
                                 card.quantity
