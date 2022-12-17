@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useClipboard } from '@vueuse/core'
 import { NButton, NModal, NSlider, NInputNumber, NTag, NCard, useMessage } from 'naive-ui';
 import axios, { AxiosError } from 'axios';
 import { handleRequestError } from '@/helpers';
@@ -86,10 +85,12 @@ const cancelGeneratingCodes = () => {
                     </template>
                 </n-card>
             </n-modal>
+            <n-tag type="warning" size="large" class="warning">Pamiętaj aby nie udostępniać kodów osobom
+                nieupoważnionym!</n-tag>
             <div class="codes-list" v-if="codes.length > 0">
-                <n-tag type="warning" size="large">Pamiętaj aby nie udostępniać kodów osobom nieupoważnionym!</n-tag>
                 <div class="codes" v-for="code in codes" :key="code.id">
-                    <n-tag :type="code.wasUsed ? 'error' : 'success'">{{ code.value }}</n-tag>
+                    <n-tag :type="code.wasUsed ? 'error' : 'success'"><i class="ph-check" v-if="!code.wasUsed"></i> <i
+                            class="ph-x" v-else></i> {{ code.value }}</n-tag>
                 </div>
             </div>
             <div class="no-codes" v-else>
@@ -118,17 +119,24 @@ const cancelGeneratingCodes = () => {
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-width: 45%;
+
+
+        .warning {
+            margin-top: 30px;
+        }
 
         .codes-list {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 250px);
             gap: 1rem;
             align-items: center;
-            padding: 5rem 0;
+            padding: 1rem 0;
         }
 
         .no-codes {
             margin-top: 75%;
+            min-width: 45%;
         }
     }
 
@@ -137,6 +145,13 @@ const cancelGeneratingCodes = () => {
         left: calc(50% - 1px);
         width: 5px;
         height: 90%;
+    }
+
+    .students {
+        min-width: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 

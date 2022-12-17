@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { NAvatar } from 'naive-ui';
+import { NAvatar, NButton, useMessage } from 'naive-ui';
 import { Icon } from '@vicons/utils';
 import { School } from '@vicons/fa';
+import axios, { AxiosError } from 'axios';
+import { handleRequestError } from '@/helpers';
+import router from '@/router';
+
 
 const props = defineProps<{
     school: string,
@@ -11,6 +15,25 @@ const props = defineProps<{
     lastName: string,
     src: string,
 }>()
+
+const message = useMessage();
+
+const signOut = async () => {
+    try {
+        await axios.post('school/logout');
+        router.push({ name: 'home' });
+        message.success("Wylogowano pomyślnie");
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            const response = handleRequestError(error);
+            if (response) {
+                message.error(`Wystąpił błąd podczas wylogowywania, status: ${response.status}, ${response.data?.message!}`);
+            } else {
+                message.error('Wystąpił błąd podczas wylogowywyania, status nieznany');
+            }
+        }
+    }
+};
 </script>
 
 <template>
@@ -30,9 +53,11 @@ const props = defineProps<{
             <div class="user-avatar">
                 <n-avatar round size="large" :src="props.src" />
             </div>
-            <div class="user-settings">
-                <i class="ph-gear"></i>
-            </div>
+            <n-button circle class="user-sign-out" size="large" :bordered="false" :focusable="false" @click="signOut">
+                <template #icon>
+                    <i class="ph-sign-out"></i>
+                </template>
+            </n-button>
         </div>
     </div>
 </template>
@@ -84,9 +109,12 @@ const props = defineProps<{
             align-items: center;
         }
 
-        .user-settings {
-            display: flex;
-            align-items: center;
+        .user-sign-out {
+            margin: auto;
+
+            &:hover {
+                cursor: pointer;
+            }
 
             i {
                 font-size: 2rem;

@@ -4,7 +4,7 @@ import { NButton, NCard, NTag } from 'naive-ui';
 
 export interface CardInterface extends Object {
     title: string,
-    imgSrc: string,
+    imgSrc: string | null,
     author: string,
     category: string,
     quantity: number,
@@ -201,7 +201,8 @@ const cardsDataComputed = computed(() => {
             <div class="card" v-for="card in cardsDataComputed" :key="card.title">
                 <n-card :title="card.title" class="n-card">
                     <template #cover>
-                        <img :src="card.imgSrc">
+                        <img :src="card.imgSrc" v-if="card.imgSrc">
+                        <i class="ph-image" v-else></i>
                         <n-tag type="info" size="small">
                             <h3>{{ card.category }}</h3>
                         </n-tag>
@@ -239,6 +240,10 @@ const cardsDataComputed = computed(() => {
 
         .card {
             max-width: 280px;
+
+            i {
+                font-size: 280px;
+            }
 
             .tags {
                 display: grid;
