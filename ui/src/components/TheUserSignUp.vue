@@ -48,7 +48,6 @@ interface ModelType {
   tosAccepted: boolean;
 }
 const model = ref<ModelType>({
-  // todo: delete placeholders
   name: "Jan",
   additionalName: "Janusz",
   surname: "Kowalski",
@@ -239,122 +238,61 @@ const genderOptions = ["żeńska", "męska", "inna"].map((v) => ({
     <n-row :gutter="[0, 24]" justify-content="space-between">
       <n-col :span="10">
         <n-form-item path="name" label="Imię">
-          <n-input
-            v-model:value="model.name"
-            @keydown.enter.prevent
-            maxlength="50"
-            placeholder="Jan"
-            :allow-input="noSpaces"
-            :input-props="{
+          <n-input v-model:value="model.name" @keydown.enter.prevent maxlength="50"
+            placeholder="Jan" :allow-input="noSpaces" :input-props="{
               autocomplete: 'given-name',
-            }"
-          />
+            }" />
         </n-form-item>
       </n-col>
       <n-col :span="10">
         <n-form-item path="additionalName" label="Drugie imię">
-          <n-input
-            v-model:value="model.additionalName"
-            @keydown.enter.prevent
-            maxlength="50"
-            placeholder="Janusz"
-            :allow-input="noSpaces"
-            :input-props="{
+          <n-input v-model:value="model.additionalName" @keydown.enter.prevent maxlength="50"
+            placeholder="Janusz" :allow-input="noSpaces" :input-props="{
               autocomplete: 'additional-name',
-            }"
-          />
+            }" />
         </n-form-item>
       </n-col>
     </n-row>
     <n-form-item path="surname" label="Nazwisko">
-      <n-input
-        v-model:value="model.surname"
-        @keydown.enter.prevent
-        maxlength="80"
-        placeholder="Kowalski"
-        :allow-input="noSpaces"
-        :input-props="{
+      <n-input v-model:value="model.surname" @keydown.enter.prevent maxlength="80"
+        placeholder="Kowalski" :allow-input="noSpaces" :input-props="{
           autocomplete: 'family-name',
-        }"
-      />
+        }" />
     </n-form-item>
     <n-form-item path="email" label="Adres e-mail">
-      <n-input
-        v-model:value="model.email"
-        @keydown.enter.prevent
-        maxlength="320"
-        placeholder="user@example.com"
-        :allow-input="noSpaces"
-      />
+      <n-input v-model:value="model.email" @keydown.enter.prevent maxlength="320"
+        placeholder="user@example.com" :allow-input="noSpaces" />
     </n-form-item>
     <n-form-item path="pesel" label="Nr Pesel">
-      <n-input
-        v-model:value="model.pesel"
-        @keydown.enter.prevent
-        minlength="11"
-        maxlength="11"
-        show-count
-        :allow-input="onlyAllowNumber"
-        placeholder="00000000000"
-        :input-props="{
+      <n-input v-model:value="model.pesel" @keydown.enter.prevent minlength="11" maxlength="11"
+        show-count :allow-input="onlyAllowNumber" placeholder="00000000000" :input-props="{
           autocomplete: 'email',
-        }"
-      />
+        }" />
     </n-form-item>
     <n-form-item path="birthday" label="Data urodzenia">
-      <n-date-picker
-        v-model:value="model.birthday"
-        type="date"
-        :format="dateFormat"
-        :placeholder="new Date().toLocaleString(language, shortDateOptions)"
-        :input-props="{
+      <n-date-picker v-model:value="model.birthday" type="date" :format="dateFormat"
+        :placeholder="new Date().toLocaleString(language, shortDateOptions)" :input-props="{
           autocomplete: 'off',
-        }"
-      />
+        }" />
     </n-form-item>
     <n-form-item path="gender" label="Płeć">
-      <n-select
-        v-model:value="model.gender"
-        :options="genderOptions"
-        placeholder="Apache Attack Helicopter"
-        :input-props="{
+      <n-select v-model:value="model.gender" :options="genderOptions"
+        placeholder="Apache Attack Helicopter" :input-props="{
           autocomplete: 'off',
-        }"
-      />
+        }" />
     </n-form-item>
     <n-form-item path="password" label="Hasło">
-      <n-input
-        v-model:value="model.password"
-        type="password"
-        @input="handlePasswordInput"
-        @keydown.enter.prevent
-        minlength="8"
-        maxlength="128"
-        placeholder="••••••••"
-        :allow-input="noSpaces"
-        :input-props="{
+      <n-input v-model:value="model.password" type="password" @input="handlePasswordInput"
+        @keydown.enter.prevent minlength="8" maxlength="128" placeholder="••••••••"
+        :allow-input="noSpaces" :input-props="{
           autocomplete: 'new-password',
-        }"
-      />
+        }" />
     </n-form-item>
-    <n-form-item
-      ref="rPasswordFormItemRef"
-      first
-      path="reenteredPassword"
-      label="Powtórz hasło"
-    >
-      <n-input
-        v-model:value="model.reenteredPassword"
-        type="password"
-        @keydown.enter.prevent
-        placeholder="••••••••"
-        :allow-input="noSpaces"
-        minlength="8"
-        maxlength="128"
-        :input-props="{
+    <n-form-item ref="rPasswordFormItemRef" first path="reenteredPassword" label="Powtórz hasło">
+      <n-input v-model:value="model.reenteredPassword" type="password" @keydown.enter.prevent
+        placeholder="••••••••" :allow-input="noSpaces" minlength="8" maxlength="128" :input-props="{
           autocomplete: 'off',
-        }"
-      />
+        }" />
     </n-form-item>
     <n-form-item path="tosAccepted" class="tos">
       <n-checkbox v-model:checked="model.tosAccepted">

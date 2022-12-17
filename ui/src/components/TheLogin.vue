@@ -30,41 +30,49 @@ const message = useMessage();
 
 const authStore = useAuthStore();
 
+const loggingInInProgress = ref(false);
+
 const logIn = () => {
-  formRef.value?.validate(async (errors: Array<FormValidationError> | undefined) => {
-    if (!errors) {
-      const logInMessage = message.create("Logowanie", {
-        type: "loading",
-        duration: 0,
-      });
-      try {
-        const response = await axios.post('school/login', logInData.value);
-        if (response.status === 200) {
-          authStore.$patch({
-            accountType: response.data?.accountType,
-          });
-          logInMessage.type = 'success';
-          logInMessage.content = 'Pomyślnie zalogowano';
-          router.push('/dashboard-student');
-        }
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          const response = handleRequestError(error);
-          logInMessage.type = 'error';
-          if (response) {
-            logInMessage.content = `Nie udało się zalogować (status: ${response.status}, ${response.data?.message!})`;
-          } else {
-            logInMessage.content = 'Nie udało się zalogować (status: nieznany)';
+  if (!loggingInInProgress.value) {
+    formRef.value?.validate(async (errors: Array<FormValidationError> | undefined) => {
+      loggingInInProgress.value = true;
+      if (!errors) {
+        const logInMessage = message.create("Logowanie", {
+          type: "loading",
+          duration: 0,
+        });
+        try {
+          const response = await axios.post('school/login', logInData.value);
+          if (response.status === 200) {
+            authStore.$patch({
+              accountType: response.data?.accountType,
+            });
+            logInMessage.type = 'success';
+            logInMessage.content = 'Pomyślnie zalogowano';
+            router.push('/dashboard-student');
+            loggingInInProgress.value = false;
           }
+        } catch (error) {
+          if (error instanceof AxiosError) {
+            const response = handleRequestError(error);
+            logInMessage.type = 'error';
+            if (response) {
+              logInMessage.content = `Nie udało się zalogować (status: ${response.status}, ${response.data?.message!})`;
+            } else {
+              logInMessage.content = 'Nie udało się zalogować (status: nieznany)';
+            }
+          }
+          loggingInInProgress.value = false;
         }
+        setTimeout(() => {
+          logInMessage.destroy();
+        }, 2000);
+      } else {
+        message.error("Najpierw należy poprawnie uzupełnić formularz");
+        loggingInInProgress.value = false;
       }
-      setTimeout(() => {
-        logInMessage.destroy();
-      }, 2000);
-    } else {
-      message.error("Najpierw należy poprawnie uzupełnić formularz");
-    }
-  });
+    });
+  }
 };
 
 const rules: FormRules = {
