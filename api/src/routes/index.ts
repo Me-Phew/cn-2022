@@ -4,6 +4,7 @@ import CategoryRouter from './Category';
 import AuthorRouter from './Author';
 import BookRouter from './Book';
 import GlobalRouter from './Global';
+import StudentRouter from './Student';
 
 const routes = <Router[]>[
     {
@@ -25,6 +26,10 @@ const routes = <Router[]>[
     {
         path: '/book',
         router: BookRouter
+    },
+    {
+        path: '/student',
+        router: StudentRouter
     }
 ];
 

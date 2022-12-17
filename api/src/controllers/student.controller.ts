@@ -3,7 +3,7 @@ import { Student } from '../entity/Student';
 import { Password } from '../entity/Password';
 import { RegistrationCode } from '../entity/RegistrationCode';
 import { NextFunction, Request, Response } from 'express';
-import { hashPassword } from 'utils/password';
+import { hashPassword } from '../utils/password';
 import { validate } from 'class-validator';
 import { ValidationError } from '../errors';
 
