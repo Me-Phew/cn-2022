@@ -46,6 +46,7 @@ export class BookController {
                 ],
                 relations: {
                     author: true, 
+                    category: true
                 }
             });
 
