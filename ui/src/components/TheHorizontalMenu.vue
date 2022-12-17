@@ -39,7 +39,8 @@ const props = defineProps<{
         color: var(--color-heading);
     }
 
-    a.router-link-exact-active {
+    a.router-link-exact-active,
+    a.router-link-active {
         color: var(--color-accent);
     }
 }

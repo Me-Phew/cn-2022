@@ -19,13 +19,4 @@ import TheLogin from "@/components/TheLogin.vue";
   align-items: center;
   gap: 2rem;
 }
-
-.vertical-divider {
-  position: absolute;
-  left: 0;
-  height: 90%;
-  width: 2px;
-  background-color: var(--color-background-mute);
-  border-radius: .345rem;
-}
 </style>

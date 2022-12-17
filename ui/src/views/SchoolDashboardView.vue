@@ -26,7 +26,7 @@ const menuItems: Array<MenuItem> = [
         key: 'bookings',
     },
     {
-        label: 'Użytkownicy',
+        label: 'Uczniowie',
         pathName: "users",
         key: 'users',
     },

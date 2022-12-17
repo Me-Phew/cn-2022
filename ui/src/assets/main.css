@@ -27,7 +27,6 @@
 }
 
 @media (hover: hover) {
-
   .sign-up-item:hover,
   .menu-item:hover,
   .return:hover {
@@ -44,4 +43,13 @@
 
 .step-description {
   margin-bottom: 1rem;
+}
+
+.vertical-divider {
+  position: absolute;
+  left: 0;
+  height: 90%;
+  width: 2px;
+  background-color: var(--color-background-mute);
+  border-radius: 0.345rem;
 }
