@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 import { School } from './School';
+import { Student } from './Student';
 
 @Entity()
 export class Password {
@@ -14,6 +15,9 @@ export class Password {
 
     @ManyToOne(() => School, (school) => school.password)
     school: School;
+
+    @ManyToOne(() => Student, (student) => student.password)
+    student: Student;
 
     @Column({
         type: 'varchar',

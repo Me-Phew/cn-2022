@@ -74,6 +74,28 @@ export class SchoolController {
         }
     }
 
+    static async validateCode(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { code: codeParam } = req.params;
+            const codeRepo = AppDataSource.getRepository(RegistrationCode);
+            const code = await codeRepo.findOneBy({
+                value: codeParam
+            });
+
+            if (!code) {
+                return next(new AuthenticationError());
+            }
+
+            if (code.wasUsed) {
+                return next(new AuthenticationError());
+            }
+
+            res.send({});
+        } catch (error) {
+            return next(error);
+        }
+    }
+
     static async getCodes(req: Request, res: Response, next: NextFunction) {
         try {
             const schoolId = +(req.user as School).id;
