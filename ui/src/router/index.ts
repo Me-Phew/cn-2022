@@ -83,7 +83,14 @@ const router = createRouter({
           path: "",
           name: "books",
           components: {
-            schoolDashboard: () => import('@/views/BooksView.vue'),
+            schoolDashboard: () => import("@/views/BooksView.vue"),
+          },
+        },
+        {
+          path: "books/add-book",
+          name: "addBook",
+          components: {
+            schoolDashboard: () => import("@/views/AddBookView.vue"),
           },
         },
         {
@@ -125,7 +132,7 @@ router.beforeEach(async (to) => {
 
   if (to.meta.requiresAuth) {
     if (authStore.isLoggedIn) {
-      authStore.loadAccountType();
+      if (!authStore.accountType) authStore.loadAccountType();
       if (authStore.accountType !== to.meta.requiredAccountType) {
         switch (authStore.accountType) {
           case AccountType.student: {
@@ -141,7 +148,7 @@ router.beforeEach(async (to) => {
     }
   } else {
     if (!to.meta.allowedAfterLogIn) {
-      authStore.loadAccountType();
+      if (!authStore.accountType) authStore.loadAccountType();
       switch (authStore.accountType) {
         case AccountType.student: {
           return { path: "/dashboard-student" };

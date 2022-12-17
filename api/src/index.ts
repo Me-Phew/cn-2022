@@ -25,6 +25,9 @@ AppDataSource.initialize()
                 secret: 'test',
                 saveUninitialized: false,
                 resave: false,
+                cookie: {
+                    httpOnly: false,
+                },
             })
         );
         app.use(passport.authenticate('session'));
@@ -43,7 +46,7 @@ AppDataSource.initialize()
          *         description: App is up and running
          */
         app.get('/', (_, res) => {
-            res.send('Welcome buddy! Let\'s chop some wood together!');
+            res.send("Welcome buddy! Let's chop some wood together!");
         });
 
         app.use(errorHandler);

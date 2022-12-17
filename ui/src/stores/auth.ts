@@ -14,7 +14,7 @@ export const useAuthStore = defineStore("auth", () => {
 
   const isLoggedIn = computed((): Boolean => {
     const cookies = useCookies();
-    return cookies.get("connect.sid");
+    return cookies.get("connect.sid") && accountType.value !== null;
   });
 
   const loadAccountType = async () => {
