@@ -185,8 +185,12 @@ const cardsDataComputed = computed(() => {
 </script>
 
 <template>
-    <div class="books-page-wrapper">
-        <n-button type="primary" size="large">Dodaj książkę</n-button>
+    <div class="books-wrapper">
+        <router-link :to="{ name: 'addBook' }">
+            <n-button type="primary" size="large">
+                Dodaj książkę
+            </n-button>
+        </router-link>
         <div class="books-wrapper">
             <div class="card" v-for="card in cardsDataComputed" :key="card.title">
                 <n-card :title="card.title">
@@ -196,9 +200,10 @@ const cardsDataComputed = computed(() => {
                     <h3><strong>Autor: </strong>{{ card.author }}</h3>
                     <h3><strong>Kategoria: </strong>{{ card.category }}</h3>
                     <p>
-                        <strong>Dostępne: </strong><span :class="card.availability">{{ card.available }}/{{
-                                card.quantity
-                        }}</span>
+                        <strong>Dostępne: </strong>
+                        <span :class="card.availability">
+                            {{ card.available }}/{{ card.quantity }}
+                        </span>
                     </p>
                 </n-card>
             </div>
