@@ -4,6 +4,7 @@ import { Icon } from '@vicons/utils';
 import { School } from '@vicons/fa';
 
 const props = defineProps<{
+    school: string,
     role: string,
     name: string,
     secondName?: string | null,
@@ -18,7 +19,7 @@ const props = defineProps<{
             <Icon size="56" color="var(--color-accent)">
                 <component :is="School"></component>
             </Icon>
-            <h1>Biblioteka ZSEM</h1>
+            <h1>Biblioteka: {{ props.school }}</h1>
         </router-link>
         <div class="user-wrapper">
             <div class="user-info">

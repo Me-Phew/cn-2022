@@ -3,6 +3,8 @@ import { IsEmail, IsIn, Length, IsNumberString, IsOptional } from 'class-validat
 import { SchoolStatus, status } from '../types';
 import { Password } from './Password';
 import { Book } from './Book';
+import { Student } from './Student';
+import { RegistrationCode } from './RegistrationCode';
 
 @Entity()
 export class School {
@@ -33,6 +35,12 @@ export class School {
 
     @OneToMany(() => Book, (book) => book.school)
     book: Book[];
+
+    @OneToMany(() => RegistrationCode, (code) => code.school)
+    registrationCodes: RegistrationCode[];
+
+    @OneToMany(() => Student, (student) => student.school)
+    students: Student[];
 
     @Column({
         default: 'pending'

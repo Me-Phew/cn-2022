@@ -1,4 +1,5 @@
 import { Book } from '../entity/Book';
+import { School } from '../entity/School';
 import { Request, Response, NextFunction } from 'express';
 import { AppDataSource } from '../data-source';
 import { validate } from 'class-validator';
@@ -14,6 +15,7 @@ export class BookController {
                 book.thumbnail = req.file.path;
             }
 
+            book.school = (req.user as School);
             for (const [key, value] of Object.entries(req.body)) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore

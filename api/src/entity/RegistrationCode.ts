@@ -1,9 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 import { School } from './School';
-import { Student } from './Student';
 
 @Entity()
-export class Password {
+export class RegistrationCode {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -13,11 +12,8 @@ export class Password {
     @UpdateDateColumn()
     updatedAt: string;
 
-    @ManyToOne(() => School, (school) => school.password)
+    @ManyToOne(() => School, (school) => school.registrationCodes)
     school: School;
-
-    @ManyToOne(() => Student, (student) => student.password)
-    student: Student;
 
     @Column({
         type: 'varchar',
@@ -29,5 +25,5 @@ export class Password {
         type: 'boolean',
         default: false,
     })
-    isCurrent: boolean;
+    wasUsed: boolean;
 }

@@ -25,7 +25,7 @@ const menuItems: Array<MenuItem> = [
 
 <template>
   <div class="student-dashboard-wrapper">
-    <TheNavbar role="Uczeń" name="Patryk" lastName="Gonet"
+    <TheNavbar school="ZSEM" role="Uczeń" name="Patryk" lastName="Gonet"
       src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
     <TheHorizontalMenu :menuItems="menuItems" />
   </div>

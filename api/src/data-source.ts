@@ -3,6 +3,8 @@ import { Password } from './entity/Password';
 import { Book } from './entity/Book';
 import { Author } from './entity/Author';
 import { Category } from './entity/Category';
+import { Student } from './entity/Student';
+import { RegistrationCode } from './entity/RegistrationCode';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { initEnv } from './utils/env';
@@ -18,7 +20,15 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: false,
-    entities: [ School, Password, Book, Author, Category ],
+    entities: [ 
+        School,
+        Password,
+        Book,
+        Author,
+        Category,
+        RegistrationCode,
+        Student
+    ],
     migrations: [],
     subscribers: [],
 });
