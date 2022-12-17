@@ -10,7 +10,10 @@ export class MeController {
                 email: (req.user as School).email
             });
 
-            res.send(school);
+            res.send({
+                ...school,
+                accountType: 'school'
+            });
         } catch (error) {
             return next(error);
         }
