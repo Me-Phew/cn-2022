@@ -118,14 +118,14 @@ const rules: FormRules = {
 <template>
   <n-form ref="formRef" :model="logInData" :rules="rules">
     <n-form-item path="email" label="E-mail">
-      <n-input v-model:value="logInData.email" type="text" placeholder="user@example.com"
-        @keydown.enter.prevent="logIn" :input-props="{
+      <n-input v-model:value="logInData.email" type="text" placeholder="user@example.com" @keydown.enter.prevent="logIn"
+        :input-props="{
           autocomplete: 'email',
         }" />
     </n-form-item>
     <n-form-item path="password" label="Hasło">
-      <n-input v-model:value="logInData.password" type="password" placeholder="••••••••"
-        @keydown.enter.prevent="logIn" :input-props="{
+      <n-input v-model:value="logInData.password" type="password" placeholder="••••••••" @keydown.enter.prevent="logIn"
+        :input-props="{
           autocomplete: 'password',
         }" />
     </n-form-item>

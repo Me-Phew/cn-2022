@@ -30,7 +30,7 @@ const cardsData = ref<Array<CardInterface>>([
         author: 'Henryk Sienkiewicz',
         category: 'Pierdolony MeloDramat',
         quantity: 20,
-        available: 4,
+        available: 3,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -57,7 +57,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 2,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -66,7 +66,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 1,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -75,7 +75,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 5,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -84,7 +84,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 7,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -93,7 +93,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 6,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -102,7 +102,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 9,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -111,7 +111,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 11,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -120,7 +120,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 12,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -129,7 +129,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 8,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -138,7 +138,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 10,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -147,7 +147,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 20,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -156,7 +156,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 19,
     },
     {
         title: 'W pustyni i w puszczy',
@@ -165,7 +165,7 @@ const cardsData = ref<Array<CardInterface>>([
         category: 'Pierdolony MeloDramat',
 
         quantity: 20,
-        available: 4,
+        available: 13,
     },
 ]);
 
