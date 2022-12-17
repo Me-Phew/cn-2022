@@ -185,7 +185,7 @@ const cardsDataComputed = computed(() => {
 </script>
 
 <template>
-    <div class="books-wrapper">
+    <div class="books-page-wrapper">
         <router-link :to="{ name: 'addBook' }">
             <n-button type="primary" size="large">
                 Dodaj książkę
