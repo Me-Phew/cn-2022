@@ -245,7 +245,7 @@ const cardsDataComputed = computed(() => {
             .tags {
                 display: grid;
                 flex-direction: column;
-                gap: .3rem;
+                gap: .5rem;
             }
 
             .good {
