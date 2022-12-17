@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Book } from './Book';
 import { IsOptional, Length } from 'class-validator';
 
@@ -13,8 +13,8 @@ export class Author {
     @UpdateDateColumn()
     updatedAt: string;
 
-    @ManyToOne(() => Book, (book) => book.author)
-    book: Book;
+    @OneToMany(() => Book, (book) => book.author)
+    book: Book[];
 
     @Column({
         type: 'varchar',

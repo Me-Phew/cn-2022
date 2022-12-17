@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import { IsEmail, IsIn, Length, IsNumberString, IsOptional } from 'class-validator';
 import { SchoolStatus, status } from '../types';
 import { Password } from './Password';
+import { Book } from './Book';
 
 @Entity()
 export class School {
@@ -29,6 +30,9 @@ export class School {
 
     @OneToMany(() => Password, (password) => password.school)
     password: Password[];
+
+    @OneToMany(() => Book, (book) => book.school)
+    book: Book[];
 
     @Column({
         default: 'pending'

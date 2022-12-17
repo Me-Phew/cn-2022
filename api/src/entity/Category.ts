@@ -1,5 +1,5 @@
 import { Length } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Book } from './Book';
 
 @Entity()
@@ -13,8 +13,8 @@ export class Category {
     @UpdateDateColumn()
     updatedAt: string;
 
-    @ManyToOne(() => Book, (book) => book.category)
-    book: Book;
+    @OneToMany(() => Book, (book) => book.category)
+    book: Book[];
 
     @Column({
         type: 'varchar',

@@ -1,5 +1,5 @@
 import { IsAlphanumeric, IsDecimal, IsNumber, IsOptional, IsString } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany, ManyToOne } from 'typeorm';
 import { Author } from './Author';
 import { Category } from './Category';
 import { School } from './School';
@@ -12,16 +12,13 @@ export class Book {
     @CreateDateColumn()
     createdAt: string;
 
-    @OneToOne(() => Author, (author) => author.id)
-    @IsNumber()
+    @ManyToOne(() => Author, (author) => author.book)
     author: Author;
 
-    @OneToOne(() => Category, (category) => category.id)
-    @IsNumber()
+    @ManyToOne(() => Category, (category) => category.book)
     category: Category;
 
-    @OneToOne(() => School, (school) => school.id)
-    @IsNumber()
+    @ManyToOne(() => School, (school) => school.book)
     school: School;
 
     @UpdateDateColumn()
@@ -59,7 +56,8 @@ export class Book {
     publishYear: number;
 
     @Column({
-        type: 'text'
+        type: 'text',
+        nullable: true
     })
     @IsOptional()
     description: string;
