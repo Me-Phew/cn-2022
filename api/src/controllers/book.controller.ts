@@ -30,7 +30,40 @@ export class BookController {
         }
     }
 
-    static async get() {
-        console.log('elo');
+    static async getById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const bookRepo = AppDataSource.getRepository(Book);
+            const book = await bookRepo.findOne({
+                where: [
+                    { id: +id }
+                ],
+                relations: {
+                    author: true, 
+                }
+            });
+
+            res.send({
+                book: book
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+    static async get(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { limit } = req.query;
+            const bookRepo = AppDataSource.getRepository(Book);
+            const books = await bookRepo.find({
+                ...(limit ? { take: +limit } : {})
+            });
+            
+            res.send({
+                books
+            });
+        } catch (error) {
+            return next(error);
+        }
     }
 }
