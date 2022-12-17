@@ -60,3 +60,7 @@
   font-weight: bolder;
   margin-bottom: .5rem;
 }
+
+.n-input {
+  width: 250px !important;
+}
