@@ -1,6 +1,5 @@
 import express, { json } from 'express';
 import session from 'express-session';
-import multer from 'multer';
 import { AppDataSource } from './data-source';
 import cors from 'cors';
 import swaggerDocs from './docs/swagger';
