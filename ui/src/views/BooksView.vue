@@ -3,6 +3,9 @@ import { ref, computed, onMounted } from 'vue';
 import { NButton, NCard, NTag } from 'naive-ui';
 import axios, { AxiosError } from 'axios';
 import { handleRequestError } from '@/helpers';
+import astronaut from '@/assets/astronaut.jpg';
+import paleBlueDot from '@/assets/pale_blue_dot.png';
+import spacex from '@/assets/spacex-wallpaper.jpg';
 
 export interface CardInterface extends Object {
     title: string,
@@ -16,6 +19,12 @@ export interface CardInterface extends Object {
 export interface CardInterfaceComputed extends CardInterface {
     availability: string,
 }
+
+const images = [
+    paleBlueDot,
+    astronaut,
+    spacex,
+]
 
 const cardsData = ref<Array<CardInterface>>([]);
 
@@ -65,10 +74,10 @@ const cardsDataComputed = computed(() => {
             </n-button>
         </router-link>
         <div class="books-wrapper">
-            <div class="card" v-for="card in cardsDataComputed" :key="card.title">
+            <div class="card" v-for="(card, index) in cardsDataComputed" :key="card.title">
                 <n-card :title="card.title" class="n-card">
                     <template #cover>
-                        <img :src="card.imgSrc" v-if="card.imgSrc">
+                        <img :src="images[index]" v-if="index < 3">
                         <i class="ph-image" v-else></i>
                         <n-tag type="info" size="small">
                             <h3>{{ card.category.name }}</h3>

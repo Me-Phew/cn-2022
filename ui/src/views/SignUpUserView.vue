@@ -5,13 +5,27 @@ import ProvideVerificationCodeItem from "@/components/ProvideVerificationCodeIte
 import TheUserSignUp from "@/components/TheUserSignUp.vue";
 import axios, { AxiosError } from 'axios';
 import { handleRequestError } from "@/helpers";
-import type { StudentSignUp } from "@/components/TheStudentSignUp.vue";
+import { useRouter } from 'vue-router';
 
+export interface StudentSignUp {
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  password: string | null;
+  reenteredPassword: string | null;
+}
 
+const router = useRouter();
 const current = ref(1);
 const message = useMessage();
 
-const studentData = ref<StudentSignUp | null>(null);
+const studentSignUp = ref<StudentSignUp>({
+  firstName: null,
+  lastName: null,
+  email: null,
+  password: null,
+  reenteredPassword: null,
+});
 
 const prev = () => {
   if (current.value > 1) current.value--;
@@ -22,22 +36,34 @@ const next = () => {
 };
 
 const signup = async () => {
+  const studentAccountCreationMessage = message.create("Tworzenie konta ucznia", {
+    type: "loading",
+    duration: 0,
+  });
   try {
-    const response = await axios.post('student', {
-
+    const response = await axios.post('school', {
+      ...studentSignUp.value,
+      'passwordConfirm': studentSignUp.value?.reenteredPassword
     });
-    console.log(response);
-    message.success('Zarejestrowano konto ucznia');
+    if (response.status === 200) {
+      studentAccountCreationMessage.type = 'success';
+      studentAccountCreationMessage.content = 'Konto użytkownika został utworzone';
+      router.push({ name: 'home' });
+    }
   } catch (error) {
     if (error instanceof AxiosError) {
       const response = handleRequestError(error);
+      studentAccountCreationMessage.type = 'error';
       if (response) {
-        message.error(`Nie udało się zarejestrować konta, status: ${response.status}, ${response.data?.message!}`);
+        studentAccountCreationMessage.content = `Nie udało się utworzyć konta użytkownika (status: ${response.status}, ${response.data?.message!})`;
       } else {
-        message.error("Nie udało się zarejestrować konta, status nie znany");
+        studentAccountCreationMessage.content = 'Nie udało się utworzyć konta użytkownika (status: nieznany)';
       }
     }
   }
+  setTimeout(() => {
+    studentAccountCreationMessage.destroy();
+  }, 2000);
 };
 </script>
 

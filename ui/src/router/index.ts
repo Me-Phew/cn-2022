@@ -107,7 +107,7 @@ const router = createRouter({
           path: "users",
           name: "users",
           components: {
-            schoolDashboard: () => import('@/views/SchoolUsersView.vue'),
+            schoolDashboard: () => import("@/views/SchoolUsersView.vue"),
           },
         },
       ],
@@ -130,37 +130,37 @@ router.beforeEach(async (to) => {
   utilsStore.$patch({
     navigationStatus: NavigationStatus.inProgress,
   });
-  const authStore = useAuthStore();
+  // const authStore = useAuthStore();
 
-  if (to.meta.requiresAuth) {
-    if (authStore.isLoggedIn) {
-      if (!authStore.accountType) await authStore.loadAccountType();
-      if (authStore.accountType !== to.meta.requiredAccountType) {
-        switch (authStore.accountType) {
-          case AccountType.student: {
-            return { path: "/dashboard-student" };
-          }
-          case AccountType.school: {
-            return { path: "/dashboard-school" };
-          }
-        }
-      }
-    } else {
-      return { name: "home" };
-    }
-  } else {
-    if (!to.meta.allowedAfterLogIn && !to.meta.requiresAuth) {
-      if (!authStore.accountType) await authStore.loadAccountType();
-      switch (authStore.accountType) {
-        case AccountType.student: {
-          return { path: "/dashboard-student" };
-        }
-        case AccountType.school: {
-          return { path: "/dashboard-school" };
-        }
-      }
-    }
-  }
+  // if (to.meta.requiresAuth) {
+  //   if (authStore.isLoggedIn && authStore.accountType) {
+  //     if (!authStore.accountType) await authStore.loadAccountType();
+  //     if (authStore.accountType !== to.meta.requiredAccountType) {
+  //       switch (authStore.accountType) {
+  //         case AccountType.student: {
+  //           return { path: "/dashboard-student" };
+  //         }
+  //         case AccountType.school: {
+  //           return { path: "/dashboard-school" };
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     return { name: "home" };
+  //   }
+  // } else {
+  //   if (!to.meta.allowedAfterLogIn && !to.meta.requiresAuth) {
+  //     if (!authStore.accountType) await authStore.loadAccountType();
+  //     switch (authStore.accountType) {
+  //       case AccountType.student: {
+  //         return { path: "/dashboard-student" };
+  //       }
+  //       case AccountType.school: {
+  //         return { path: "/dashboard-school" };
+  //       }
+  //     }
+  //   }
+  // }
 
   return true;
 });

@@ -66,7 +66,7 @@ const handleSubmit = async () => {
           if (response.status === 200) {
             loadingMessage.destroy();
             loading.value = false;
-            emit("completed");
+            emit("completed", model.value.verificationCode);
           } else {
             loadingMessage.destroy();
             message.error("Podano nieprawidłowy lub wykorzystany kod");
@@ -95,8 +95,9 @@ const handleSubmit = async () => {
 <template>
   <n-form ref="form" :model="model" :rules="rules">
     <n-form-item path="verificationCode" label="Kod dostępu">
-      <n-input v-model:value="model.verificationCode" @keydown.enter.prevent="handleSubmit" minlength="16"
-        maxlength="16" show-count placeholder="ANS21fh26j4d7438" :on-blur="trimTrailingWhitespace" :input-props="{
+      <n-input v-model:value="model.verificationCode" @keydown.enter.prevent="handleSubmit"
+        minlength="16" maxlength="16" show-count placeholder="ANS21fh26j4d7438"
+        :on-blur="trimTrailingWhitespace" :input-props="{
           autocomplete: 'off',
         }" />
     </n-form-item>
