@@ -10,6 +10,7 @@ import type {
 } from "naive-ui";
 import { useMessage, NFormItem, NForm, NInput, NButton } from "naive-ui";
 import { validateEmail, handleRequestError } from "@/helpers";
+import { useAuthStore, AccountType } from "@/stores/auth";
 
 const router = useRouter();
 
@@ -27,6 +28,8 @@ const logInData = ref<ModelType>({
 
 const message = useMessage();
 
+const authStore = useAuthStore();
+
 const logIn = () => {
   formRef.value?.validate(async (errors: Array<FormValidationError> | undefined) => {
     if (!errors) {
@@ -37,6 +40,9 @@ const logIn = () => {
       try {
         const response = await axios.post('school/login', logInData.value);
         if (response.status === 200) {
+          authStore.$patch({
+            accountType: response.data?.accountType,
+          });
           logInMessage.type = 'success';
           logInMessage.content = 'Pomyślnie zalogowano';
           router.push('/dashboard-student');

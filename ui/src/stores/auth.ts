@@ -1,36 +1,35 @@
 import { defineStore } from "pinia";
-import router from '@/router';
+import { ref, computed } from "vue";
+import { useCookies } from "@vueuse/integrations/useCookies";
+import axios, { AxiosError } from "axios";
+import { handleRequestError } from "@/helpers";
 
-export const useAuthStore = defineStore({
-  id: "auth",
-  state: () => ({
-    // initialize state from local storage to enable user to stay logged in
-    // user: JSON.parse(localStorage.getItem("user")),
-  }),
-  // actions: {
-  //   async login(username: String, password: String) {
-  //     try {
-  //       const user = await fetchWrapper.post(`${baseUrl}/authenticate`, {
-  //         username,
-  //         password,
-  //       });
+export enum AccountType {
+  school = "school",
+  student = "student",
+}
 
-  //       // update pinia state
-  //       this.user = user;
+export const useAuthStore = defineStore("auth", () => {
+  const accountType = ref<null | AccountType>(null);
 
-  //       // store user details and jwt in local storage to keep user logged in between page refreshes
-  //       localStorage.setItem("user", JSON.stringify(user));
+  const isLoggedIn = computed((): Boolean => {
+    const cookies = useCookies();
+    return cookies.get("connect.sid");
+  });
 
-  //       // redirect to previous url or default to home page
-  //       router.push(this.returnUrl || "/");
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   },
-  //   logout() {
-  //     this.user = null;
-  //     localStorage.removeItem("user");
-  //     router.push("/account/login");
-  //   },
-  // },
+  const loadAccountType = async () => {
+    try {
+      const response = await axios.get("me");
+      if (response.status === 200) {
+        accountType.value = response.data.accountType;
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const response = handleRequestError(error);
+        console.error(response);
+      }
+    }
+  };
+
+  return { accountType, isLoggedIn, loadAccountType };
 });

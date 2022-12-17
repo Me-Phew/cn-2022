@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore, AccountType } from "@/stores/auth";
 import { useUtilsStore } from "@/stores/utils";
 import HomeView from "@/views/HomeView.vue";
 import { NavigationStatus } from "@/stores/utils";
@@ -43,7 +43,7 @@ const router = createRouter({
       ],
       meta: {
         requiresAuth: false,
-        requiredPermissionLevel: "user",
+        allowedAfterLogIn: false,
         transition: "curtains-transition",
       },
     },
@@ -69,8 +69,8 @@ const router = createRouter({
         },
       ],
       meta: {
-        requiresAuth: false,
-        requiredPermissionLevel: "student",
+        requiresAuth: true,
+        requiredAccountType: AccountType.student,
         transition: "curtains-transition",
       },
     },
@@ -103,8 +103,8 @@ const router = createRouter({
         },
       ],
       meta: {
-        requiresAuth: false,
-        requiredPermissionLevel: "school",
+        requiresAuth: true,
+        requiredAccountType: AccountType.school,
         transition: "curtains-transition",
       },
     },
@@ -121,39 +121,39 @@ router.beforeEach(async (to) => {
   utilsStore.$patch({
     navigationStatus: NavigationStatus.inProgress,
   });
-  //   const authStore = useAuthStore();
-  //   await authStore.dispatch("loadAuthData");
-  //   if (authStore.getters.isLoggedIn) {
-  //     if (to.name === "login" || to.name === "sign-up") return "/";
-  //   }
-  //   if (to.meta.requiresAuth) {
-  //     if (!store.getters.isLoggedIn) {
-  //       return { name: "login" };
-  //     }
-  //     switch (to.meta.requiredPermissionLevel) {
-  //       case "admin": {
-  //         if (!store.getters.isAdmin) {
-  //           return {
-  //             name: "insufficientPermissions",
-  //           };
-  //         }
-  //         break;
-  //       }
-  //       case "owner": {
-  //         if (!store.getters.isOwner) {
-  //           return {
-  //             name: "insufficientPermissions",
-  //           };
-  //         }
-  //         break;
-  //       }
-  //       default: {
-  //         break;
-  //       }
-  //     }
-  //   }
+  const authStore = useAuthStore();
 
-  //   return true;
+  if (to.meta.requiresAuth) {
+    if (authStore.isLoggedIn) {
+      authStore.loadAccountType();
+      if (authStore.accountType !== to.meta.requiredAccountType) {
+        switch (authStore.accountType) {
+          case AccountType.student: {
+            return { path: "/dashboard-student" };
+          }
+          case AccountType.school: {
+            return { path: "/dashboard-school" };
+          }
+        }
+      }
+    } else {
+      return { name: "home" };
+    }
+  } else {
+    if (!to.meta.allowedAfterLogIn) {
+      authStore.loadAccountType();
+      switch (authStore.accountType) {
+        case AccountType.student: {
+          return { path: "/dashboard-student" };
+        }
+        case AccountType.school: {
+          return { path: "/dashboard-school" };
+        }
+      }
+    }
+  }
+
+  return true;
 });
 
 router.afterEach((_to, _from, failure) => {
