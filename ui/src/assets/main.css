@@ -67,3 +67,7 @@
   font-weight: bolder;
   margin-bottom: 0.5rem;
 }
+
+.n-input {
+  width: 250px !important;
+}
