@@ -5,6 +5,9 @@ import { AppDataSource } from '../data-source';
 import { validate } from 'class-validator';
 import { ValidationError } from './../errors/custom';
 import { hashPassword } from '../utils/password';
+import { AuthenticationError } from '../errors/custom/Auth';
+import { RegistrationCode } from '../entity/RegistrationCode';
+import { generateCode } from '../utils/codes';
 
 export class SchoolController {
     static async create(req: Request, res: Response, next: NextFunction) {
@@ -35,6 +38,36 @@ export class SchoolController {
             await passwordRepo.save(password);
             school.password = [password];
             await schoolRepo.save(school);
+            res.send({});
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+    static async generateCodes(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id: schoolId } = req.user as School;
+            const schoolRepo = AppDataSource.getRepository(School);
+            const codesRepo = AppDataSource.getRepository(RegistrationCode);
+            const school = await schoolRepo.findOneBy({
+                id: +schoolId
+            });
+
+            if (!school) {
+                return next(new AuthenticationError());
+            }
+
+            for (let i = 0; i < req.body.amount; i++) {
+                const code = new RegistrationCode();
+                code.school = school;
+                code.value = await generateCode() as string;
+                await codesRepo.save(code);
+
+                if (!school.registrationCodes) {
+                    school.registrationCodes = [];
+                }
+            }
+
             res.send({});
         } catch (error) {
             return next(error);
