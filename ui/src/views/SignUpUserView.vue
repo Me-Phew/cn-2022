@@ -1,18 +1,43 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { NSteps, NStep, NCollapseTransition } from "naive-ui";
+import { NSteps, NStep, NCollapseTransition, NButton, useMessage } from "naive-ui";
 import ProvideVerificationCodeItem from "@/components/ProvideVerificationCodeItem.vue";
-import ProvideVerificationDocumentsItem from "@/components/ProvideVerificationDocumentsItem.vue";
 import TheUserSignUp from "@/components/TheUserSignUp.vue";
+import axios, { AxiosError } from 'axios';
+import { handleRequestError } from "@/helpers";
+import type { StudentSignUp } from "@/components/TheStudentSignUp.vue";
+
 
 const current = ref(1);
+const message = useMessage();
+
+const studentData = ref<StudentSignUp | null>(null);
 
 const prev = () => {
   if (current.value > 1) current.value--;
 };
 
 const next = () => {
-  if (current.value < 4) current.value++;
+  if (current.value < 3) current.value++;
+};
+
+const signup = async () => {
+  try {
+    const response = await axios.post('student', {
+
+    });
+    console.log(response);
+    message.success('Zarejestrowano konto ucznia');
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const response = handleRequestError(error);
+      if (response) {
+        message.error(`Nie udało się zarejestrować konta, status: ${response.status}, ${response.data?.message!}`);
+      } else {
+        message.error("Nie udało się zarejestrować konta, status nie znany");
+      }
+    }
+  }
 };
 </script>
 
@@ -40,21 +65,14 @@ const next = () => {
           </div>
         </n-collapse-transition>
       </n-step>
-      <n-step title="Weryfikacja tożsamości">
-        <n-collapse-transition :show="current === 3">
-          <div class="n-step-description">
-            <p>Prześlij dokumenty wymagane do weryfikacji tożsamoście</p>
-            <ProvideVerificationDocumentsItem />
-          </div>
-        </n-collapse-transition>
-      </n-step>
       <n-step title="Przesłanie wniosku">
-        <n-collapse-transition :show="current === 4">
+        <n-collapse-transition :show="current === 3">
           <div class="n-step-description">
             <p>
               Zweryfikuj poprawność danych i prześlij wniosek o aktywację konta
             </p>
           </div>
+          <n-button type="success" @click="signup">Prześlij wniosek</n-button>
         </n-collapse-transition>
       </n-step>
     </n-steps>
