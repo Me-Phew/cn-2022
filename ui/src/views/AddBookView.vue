@@ -506,7 +506,7 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
           Załącz zdjęcie
         </n-upload>
         <n-modal v-model:show="showThumbnailPreviewModal" preset="card" style="width: 600px"
-          :title="thumbnailFileName" :show-preview-button="true">
+          :title="thumbnailFileName">
           <img :src="thumbnailPreviewUrlRef" style="width: 100%">
         </n-modal>
       </n-form-item>
