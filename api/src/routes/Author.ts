@@ -4,7 +4,7 @@ import { AuthorController } from '../controllers/author.controller';
 
 const AuthorRouter = Router();
 
-AuthorRouter.post('/', AuthorController.create);
-AuthorRouter.get('/', AuthorController.get);
+AuthorRouter.post('/', passport.authenticate('local'), AuthorController.create);
+AuthorRouter.get('/', passport.authenticate('local'), AuthorController.get);
 
 export default AuthorRouter;

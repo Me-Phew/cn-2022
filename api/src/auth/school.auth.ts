@@ -20,7 +20,10 @@ passport.deserializeUser(async function(id, cb) {
         return cb('Siema');
     }
 
-    cb(null, school);
+    cb(null, {
+        ...school,
+        accountType: 'school'
+    });
 });
 
 passport.use(new LocalStrategy({
