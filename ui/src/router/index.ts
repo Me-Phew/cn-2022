@@ -134,7 +134,7 @@ router.beforeEach(async (to) => {
 
   if (to.meta.requiresAuth) {
     if (authStore.isLoggedIn) {
-      if (!authStore.accountType) authStore.loadAccountType();
+      if (!authStore.accountType) await authStore.loadAccountType();
       if (authStore.accountType !== to.meta.requiredAccountType) {
         switch (authStore.accountType) {
           case AccountType.student: {
@@ -149,8 +149,8 @@ router.beforeEach(async (to) => {
       return { name: "home" };
     }
   } else {
-    if (!to.meta.allowedAfterLogIn) {
-      if (!authStore.accountType) authStore.loadAccountType();
+    if (!to.meta.allowedAfterLogIn && !to.meta.requiresAuth) {
+      if (!authStore.accountType) await authStore.loadAccountType();
       switch (authStore.accountType) {
         case AccountType.student: {
           return { path: "/dashboard-student" };

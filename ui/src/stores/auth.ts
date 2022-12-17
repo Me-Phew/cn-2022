@@ -19,9 +19,18 @@ export const useAuthStore = defineStore("auth", () => {
 
   const loadAccountType = async () => {
     try {
-      const response = await axios.get("me");
+      const response = await axios.get("global/me");
       if (response.status === 200) {
-        accountType.value = response.data.accountType;
+        switch (response.data.accountType) {
+          case "school": {
+            accountType.value = AccountType.school;
+            break;
+          }
+          case "student": {
+            accountType.value = AccountType.student;
+            break;
+          }
+        }
       }
     } catch (error) {
       if (error instanceof AxiosError) {
