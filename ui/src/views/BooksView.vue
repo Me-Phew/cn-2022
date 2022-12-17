@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { NButton, NCard, NTag } from 'naive-ui';
+import axios, { AxiosError } from 'axios';
+import { handleRequestError } from '@/helpers';
 
 export interface CardInterface extends Object {
     title: string,
@@ -15,159 +17,24 @@ export interface CardInterfaceComputed extends CardInterface {
     availability: string,
 }
 
-const cardsData = ref<Array<CardInterface>>([
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-        quantity: 20,
-        available: 4,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-        quantity: 20,
-        available: 3,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
+const cardsData = ref<Array<CardInterface>>([]);
 
-        quantity: 20,
-        available: 0,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
+const loadBooks = async () => {
+    try {
+        const response = await axios.get('book');
+        if (response.status === 200) {
+            cardsData.value = response.data.books;
+        }
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            handleRequestError(error);
+        }
+    }
+}
 
-        quantity: 20,
-        available: 18,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 2,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 1,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 5,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 7,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 6,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 9,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 11,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 12,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 8,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 10,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 20,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 19,
-    },
-    {
-        title: 'W pustyni i w puszczy',
-        imgSrc: 'https://www.greg.pl/imgs/covers/500/W-pustyni-i-w-puszczy_lpp.jpg',
-        author: 'Henryk Sienkiewicz',
-        category: 'Pierdolony MeloDramat',
-
-        quantity: 20,
-        available: 13,
-    },
-]);
+onMounted(async () => {
+    await loadBooks();
+})
 
 const cardsDataComputed = computed(() => {
     const newCardsData: Array<CardInterfaceComputed> = [];
