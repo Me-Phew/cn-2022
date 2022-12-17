@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import passport from '../auth/school.auth';
 import { CategoryController } from '../controllers/category.controller';
 import { auth } from '../middleware/auth';
 

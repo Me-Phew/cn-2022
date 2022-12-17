@@ -3,8 +3,13 @@ import SchoolRouter from './School';
 import CategoryRouter from './Category';
 import AuthorRouter from './Author';
 import BookRouter from './Book';
+import GlobalRouter from './Global';
 
 const routes = <Router[]>[
+    {
+        path: '/global',
+        router: GlobalRouter
+    },
     {
         path: '/school',
         router: SchoolRouter
