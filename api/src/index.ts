@@ -1,5 +1,6 @@
 import express, { json } from 'express';
 import session from 'express-session';
+import multer from 'multer';
 import { AppDataSource } from './data-source';
 import cors from 'cors';
 import swaggerDocs from './docs/swagger';
@@ -30,6 +31,7 @@ AppDataSource.initialize()
                 },
             })
         );
+        app.use('/public/img', express.static('uploads'));
         app.use(passport.authenticate('session'));
         swaggerDocs(app, PORT as unknown as number);
         registerRoutes(app, routes);
