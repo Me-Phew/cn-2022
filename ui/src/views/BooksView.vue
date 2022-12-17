@@ -3,19 +3,28 @@ import { ref, computed, onMounted } from 'vue';
 import { NButton, NCard, NTag } from 'naive-ui';
 import axios, { AxiosError } from 'axios';
 import { handleRequestError } from '@/helpers';
+import astronaut from '@/assets/astronaut.jpg';
+import paleBlueDot from '@/assets/pale_blue_dot.png';
+import spacex from '@/assets/spacex-wallpaper.jpg';
 
 export interface CardInterface extends Object {
     title: string,
     imgSrc: string | null,
     author: string,
-    category: string,
+    category: object,
     quantity: number,
-    available: number,
+    amount: number,
 }
 
 export interface CardInterfaceComputed extends CardInterface {
     availability: string,
 }
+
+const images = [
+    paleBlueDot,
+    astronaut,
+    spacex,
+]
 
 const cardsData = ref<Array<CardInterface>>([]);
 
@@ -41,10 +50,10 @@ const cardsDataComputed = computed(() => {
 
     cardsData.value.forEach(cardData => {
         let availability;
-        if (cardData.quantity / cardData.available > (.25 * cardData.available)) {
+        if (cardData.quantity / cardData.amount > (.25 * cardData.amount)) {
             availability = 'low ';
         }
-        if (cardData.available === 0) {
+        if (cardData.amount === 0) {
             availability = 'none';
         }
         if (!availability) {
@@ -65,22 +74,24 @@ const cardsDataComputed = computed(() => {
             </n-button>
         </router-link>
         <div class="books-wrapper">
-            <div class="card" v-for="card in cardsDataComputed" :key="card.title">
+            <div class="card" v-for="(card, index) in cardsDataComputed" :key="card.title">
                 <n-card :title="card.title" class="n-card">
                     <template #cover>
-                        <img :src="card.imgSrc" v-if="card.imgSrc">
+                        <img :src="images[index]" v-if="index < 3">
                         <i class="ph-image" v-else></i>
                         <n-tag type="info" size="small">
-                            <h3>{{ card.category }}</h3>
+                            <h3>{{ card.category.name }}</h3>
                         </n-tag>
                     </template>
                     <div class="tags">
-                        <h3>Autor: {{ card.author }}</h3>
+                        <h3>Autor: {{ card.author.firstName }} {{ card.author.secondName }} {{
+                                card.author.lastName
+                        }}</h3>
                         <n-tag :bordered="false">
                             <p>
                                 Dostępne:
                                 <span :class="card.availability">
-                                    {{ card.available }}/{{ card.quantity }}
+                                    {{ card.amount }}/{{ card.quantity }}
                                 </span>
                             </p>
                         </n-tag>
