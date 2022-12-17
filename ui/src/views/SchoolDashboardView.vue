@@ -35,7 +35,7 @@ const menuItems: Array<MenuItem> = [
 
 <template>
     <div class="school-dashboard-wrapper">
-        <TheNavbar role="Administrator" name="Walenty" lastName="Szarek"
+        <TheNavbar school="ZSEM" role="Administrator" name="Walenty" lastName="Szarek"
             src="https://previews.123rf.com/images/findriyani/findriyani1807/findriyani180700241/105630149-education-people-school-logo-design-template.jpg" />
         <TheHorizontalMenu :menuItems="menuItems" />
         <RouterView name="schoolDashboard" />
