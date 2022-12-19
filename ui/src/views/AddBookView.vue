@@ -357,7 +357,7 @@ const createBook = () => {
             amount: bookData.value.amount?.toString(),
             quantity: bookData.value.amount?.toString(),
             price: bookData.value.price?.toString(),
-            publishYear: new Date(bookData.value).getFullYear().toString(),
+            publishYear: new Date(bookData.value.publishYear).getFullYear().toString(),
             category: bookData.value.category?.toString(),
           });
           if (response.status === 200) {
@@ -430,21 +430,20 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
     <h1 class="text-accent">Dodawanie książki</h1>
     <n-form ref="bookForm" :model="bookData" :rules="bookFormRules">
       <n-form-item path="author" label="Autor">
-        <n-select v-model:value="bookData.author" filterable placeholder="Wyszukaj autora"
-          :options="authorsSelect" :loading="authorsLoading" remote @search="handleAuthorSearch" />
+        <n-select v-model:value="bookData.author" filterable placeholder="Wyszukaj autora" :options="authorsSelect"
+          :loading="authorsLoading" remote @search="handleAuthorSearch" />
         <n-button type="primary" size="large" @click="showCreateAuthorModal = true">
           Dodaj autora
         </n-button>
         <n-modal v-model:show="showCreateAuthorModal">
-          <n-card style="width: 600px" title="Dodaj autora" :bordered="false" size="huge"
-            role="dialog" aria-modal="true">
+          <n-card style="width: 600px" title="Dodaj autora" :bordered="false" size="huge" role="dialog"
+            aria-modal="true">
             <n-form ref="authorForm" :model="authorData" :rules="authorFormRules">
               <n-form-item path="firstName" label="Imię">
                 <n-input v-model:value="authorData.firstName" type="text" placeholder="Adam" />
               </n-form-item>
               <n-form-item path="secondName" label="Drugie imię">
-                <n-input v-model:value="authorData.secondName" type="text"
-                  placeholder="user@example.com" />
+                <n-input v-model:value="authorData.secondName" type="text" placeholder="user@example.com" />
               </n-form-item>
               <n-form-item path="lastName" label="Nazwisko">
                 <n-input v-model:value="authorData.lastName" type="text" placeholder="Mickiewicz" />
@@ -461,20 +460,18 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
 
       <n-form-item path="category" label="Kategoria">
         <n-select v-model:value="bookData.category" filterable placeholder="Wyszukaj kategorię"
-          :options="categoriesSelect" :loading="categoriesLoading" remote
-          @search="handleCategorySearch" />
+          :options="categoriesSelect" :loading="categoriesLoading" remote @search="handleCategorySearch" />
 
         <n-button type="primary" size="large" @click="showCreateCategoryModal = true">
           Dodaj kategorię
         </n-button>
         <n-modal v-model:show="showCreateCategoryModal">
-          <n-card style="width: 600px" title="Dodaj kategorię" :bordered="false" size="huge"
-            role="dialog" aria-modal="true">
+          <n-card style="width: 600px" title="Dodaj kategorię" :bordered="false" size="huge" role="dialog"
+            aria-modal="true">
             <p class='text-accent heading'>Podaj dane kategorii:</p>
             <n-form ref="categoryForm" :model="categoryData" :rules="categoryFormRules">
               <n-form-item path="firstName" label="Nazwa">
-                <n-input v-model:value="categoryData.name" type="text"
-                  placeholder="Lektury szkolne" />
+                <n-input v-model:value="categoryData.name" type="text" placeholder="Lektury szkolne" />
               </n-form-item>
               <div class="button-wrapper">
                 <n-button round type="primary" @click.prevent="createCategory">
@@ -498,13 +495,11 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
 
       <n-form-item path="price" label="Cena">
         <n-slider v-model:value="bookData.price" :step="1" :min="1" :max="100" />
-        <n-input-number v-model:value="bookData.price" size="small" :min="1" :max="100"
-          placeholder="Cena" />
+        <n-input-number v-model:value="bookData.price" size="small" :min="1" :max="100" placeholder="Cena" />
       </n-form-item>
 
       <n-form-item path="publishYear" label="Rok wydania">
-        <n-date-picker v-model:value="bookData.publishYear" type="year" clearable
-          placeholder="Rok wydania" />
+        <n-date-picker v-model:value="bookData.publishYear" type="year" clearable placeholder="Rok wydania" />
       </n-form-item>
 
       <n-form-item path="image" label="Zdjęcie okładki">
@@ -512,8 +507,7 @@ const handleThumbnailPreview = (file: UploadFileInfo) => {
           @preview="handleThumbnailPreview" @update-file-list="handleUpdateFileList">
           Załącz zdjęcie
         </n-upload>
-        <n-modal v-model:show="showThumbnailPreviewModal" preset="card" style="width: 600px"
-          :title="thumbnailFileName">
+        <n-modal v-model:show="showThumbnailPreviewModal" preset="card" style="width: 600px" :title="thumbnailFileName">
           <img :src="thumbnailPreviewUrlRef" style="width: 100%">
         </n-modal>
       </n-form-item>
